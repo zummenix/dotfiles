@@ -14,3 +14,8 @@ brew bundle cleanup -v
 
 # Run ansible playbook
 ansible-playbook -i inventory playbook.yml
+
+LINE="$(which fish)"
+FILE=/etc/shells
+grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
+chsh -s $LINE

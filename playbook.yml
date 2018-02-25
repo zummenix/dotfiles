@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: ensure .config directory exist
+      file:
+        path: "~/.config"
+        state: directory
+    - name: symlink neovim settings
+      file:
+        src: "{{ playbook_dir }}/nvim"
+        dest: "~/.config/nvim"
+        state: link
+        force: yes
+    - name: install packages using homebrew
+      homebrew:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - tig
+        - mpv
+        - tree
+        - fish
+        - tmux
+        - trash
+        - youtube-dl

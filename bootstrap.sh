@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
 if [ -x "$(command -v brew)" ]; then
-    echo "Update homebrew"
+    echo "Updating homebrew"
     brew update
 else
-    echo "Install homebrew"
+    echo "Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-if [ -x "$(command -v ansible)" ]; then
-    echo "Update ansible"
-    brew upgrade ansible
-else
-    echo "Install ansible"
-    brew install ansible
-fi
+# Install/cleanup dependencies using Brewfile
+brew bundle -v
+brew bundle cleanup -v
+
+# Run ansible playbook
+ansible-playbook -i inventory playbook.yml

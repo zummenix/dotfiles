@@ -11,15 +11,3 @@
         dest: "~/.config/nvim"
         state: link
         force: yes
-    - name: install packages using homebrew
-      homebrew:
-        name: "{{ item }}"
-        state: latest
-      with_items:
-        - tig
-        - mpv
-        - tree
-        - fish
-        - tmux
-        - trash
-        - youtube-dl

@@ -1,4 +1,4 @@
-set -U EDITOR nvim
+set -Ux EDITOR nvim
 
 if status --is-interactive
     eval sh $HOME/.config/base16-shell/scripts/base16-ocean.sh

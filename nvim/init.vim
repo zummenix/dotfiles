@@ -22,6 +22,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'pangloss/vim-javascript'
 Plug 'machakann/vim-highlightedyank'
 Plug 'pearofducks/ansible-vim'
+Plug 'dag/vim-fish'
 call plug#end()
 
 let g:elm_setup_keybindings = 0

@@ -5,15 +5,18 @@ function fish_right_prompt
             return
         end
         set -l git_status (git status --porcelain ^/dev/null|cut -c 1-2|sort -u)
-        set_color blue
+        set -l normal_color 778
+        set_color $normal_color
         echo -n 'git['
         echo -n $git_branch
         if test -z "$git_status"
+            set_color green
             echo -n '•'
+            set_color $normal_color
         else
             set_color red
             echo -n '•'
-            set_color blue
+            set_color $normal_color
         end
         echo -n ']'
     end

@@ -4,5 +4,5 @@ function fish_prompt --description 'Write out the prompt'
     else
         set_color 778
     end
-    echo 'λ '
+    echo -n 'λ '
 end

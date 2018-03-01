@@ -1,10 +1,7 @@
 function fish_right_prompt
-    if __fish_is_git_repository
-        set -l git_branch (git rev-parse --abbrev-ref HEAD ^/dev/null)
-        if test -z "$git_branch"
-            return
-        end
-        set -l git_status (git status --porcelain ^/dev/null|cut -c 1-2|sort -u)
+    set -l git_branch (git rev-parse --abbrev-ref HEAD ^/dev/null)
+    if test -n "$git_branch"
+        set -l git_status (git status --porcelain ^/dev/null)
         set -l git_line_color 778
         set_color $git_line_color
         echo -n 'git['

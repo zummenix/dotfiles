@@ -23,6 +23,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'machakann/vim-highlightedyank'
 Plug 'pearofducks/ansible-vim'
 Plug 'dag/vim-fish'
+Plug 'henrik/vim-indexed-search'
 call plug#end()
 
 let g:elm_setup_keybindings = 0

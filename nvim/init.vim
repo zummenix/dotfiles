@@ -31,6 +31,24 @@ let g:elm_format_autosave = 1
 
 let g:rustfmt_autosave = 1
 
+let g:sneak#s_next = 1
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+
+let g:airline#extensions#tabline#enabled=1
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#max_list = 7
+
 set hidden
 set number
 set relativenumber
@@ -50,8 +68,15 @@ set shiftwidth=4
 set expandtab
 set scrolloff=3
 
+set laststatus=2
+
+" Show trailing spaces.
+set listchars=tab:►-,trail:·
+set list
+
 filetype plugin indent on
 
+" Sane splits.
 set splitright
 set splitbelow
 
@@ -77,22 +102,10 @@ nnoremap <Leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 xnoremap < <gv
 xnoremap > >gv
 
-let g:sneak#s_next = 1
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-
 " Add more granularity to undo history.
 inoremap <space> <space><c-g>u
 inoremap . .<c-g>u
 inoremap , ,<c-g>u
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ }
 
 nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
@@ -102,11 +115,4 @@ if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
 endif
-
-let g:airline#extensions#tabline#enabled=1
-set laststatus=2
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#max_list = 7
 

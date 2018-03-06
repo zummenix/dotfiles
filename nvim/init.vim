@@ -1,4 +1,4 @@
-language en_US
+language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'rust-lang/rust.vim'

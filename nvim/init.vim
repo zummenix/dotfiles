@@ -26,12 +26,12 @@ Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
 call plug#end()
 
-let g:elm_setup_keybindings = 0
-let g:elm_format_autosave = 1
+let g:elm_setup_keybindings=0
+let g:elm_format_autosave=1
 
-let g:rustfmt_autosave = 1
+let g:rustfmt_autosave=1
 
-let g:sneak#s_next = 1
+let g:sneak#s_next=1
 nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
 xmap f <Plug>Sneak_f
@@ -52,8 +52,8 @@ let g:LanguageClient_serverCommands = {
 let g:airline#extensions#tabline#enabled=1
 
 " deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#max_list = 7
+let g:deoplete#enable_at_startup=1
+let g:deoplete#max_list=7
 
 set hidden
 set number
@@ -88,21 +88,21 @@ set splitbelow
 
 let mapleader="\<SPACE>"
 
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" <tab>: completion.
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-nmap <Leader><Leader> <c-^>
+nmap <leader><leader> <c-^>
 
-nnoremap <Leader>q :bdelete<CR>
+nnoremap <leader>q :bdelete<cr>
 
-nnoremap <Tab> :bnext!<CR>
-nnoremap <S-Tab> :bprev!<CR>
+nnoremap <tab> :bnext!<cr>
+nnoremap <s-tab> :bprev!<cr>
 
-nnoremap <Leader>p :CtrlP<CR>
-nnoremap <Leader>t :CtrlP<CR>
+nnoremap <leader>p :CtrlP<cr>
+nnoremap <leader>t :CtrlP<cr>
 
 " Redraw the window.
-nnoremap <Leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 " Don't loose visual selection when using indent.
 xnoremap < <gv
@@ -113,9 +113,9 @@ inoremap <space> <space><c-g>u
 inoremap . .<c-g>u
 inoremap , ,<c-g>u
 
-nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> gh :call LanguageClient_textDocument_hover()<cr>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+nnoremap <silent> gr :call LanguageClient_textDocument_rename()<cr>
 
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256

@@ -24,6 +24,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'pearofducks/ansible-vim'
 Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
+Plug 'gluon-lang/vim-gluon'
 call plug#end()
 
 let g:elm_setup_keybindings=0

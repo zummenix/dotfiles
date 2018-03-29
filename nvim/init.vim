@@ -77,6 +77,8 @@ set scrolloff=3
 
 set laststatus=2
 
+set colorcolumn=100
+
 " Show trailing spaces.
 set listchars=tab:►-,trail:·
 set list

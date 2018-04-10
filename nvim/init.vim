@@ -50,8 +50,6 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ }
 
-let g:airline#extensions#tabline#enabled=1
-
 " deoplete
 let g:deoplete#enable_at_startup=1
 let g:deoplete#max_list=7
@@ -98,8 +96,11 @@ nmap <leader><leader> <c-^>
 
 nnoremap <leader>q :bdelete<cr>
 
+" Cycle through buffers.
 nnoremap <tab> :bnext!<cr>
 nnoremap <s-tab> :bprev!<cr>
+" Open buffer's list for selection.
+nnoremap gb :ls<cr>:b<space>
 
 nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlP<cr>

@@ -73,6 +73,10 @@ set shiftwidth=4
 set expandtab
 set scrolloff=3
 
+" Folding using indentation and in unfold state by default.
+set foldmethod=indent
+set foldlevel=20
+
 set laststatus=2
 
 set colorcolumn=100

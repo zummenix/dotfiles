@@ -12,7 +12,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
-Plug 'justinmk/vim-sneak'
 Plug 'chriskempson/base16-vim'
 Plug 'wincent/terminus'
 Plug 'wincent/ferret'
@@ -31,14 +30,6 @@ let g:elm_setup_keybindings=0
 let g:elm_format_autosave=1
 
 let g:rustfmt_autosave=1
-
-let g:sneak#s_next=1
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
 
 " Convenient jumps between splits.
 nmap <c-h> <c-w>h

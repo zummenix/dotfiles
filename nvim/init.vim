@@ -57,18 +57,18 @@ set signcolumn=yes
 set completeopt=menu,preview,noinsert
 set cursorline
 set backspace=indent,start,eol
-set autoindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
 set scrolloff=3
+set laststatus=2
+
+" Configure tab indentation.
+set autoindent
+set expandtab
+set tabstop=4
+set shiftwidth=0 " Use tabstop value.
 
 " Folding using indentation and in unfold state by default.
 set foldmethod=indent
 set foldlevel=20
-
-set laststatus=2
 
 set colorcolumn=100
 

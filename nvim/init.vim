@@ -24,12 +24,10 @@ Plug 'pearofducks/ansible-vim'
 Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
 Plug 'gluon-lang/vim-gluon'
+Plug 'sbdchd/neoformat'
 call plug#end()
 
 let g:elm_setup_keybindings=0
-let g:elm_format_autosave=1
-
-let g:rustfmt_autosave=1
 
 " Convenient jumps between splits.
 nmap <c-h> <c-w>h
@@ -123,4 +121,9 @@ if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
 endif
+
+augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
+augroup END
 

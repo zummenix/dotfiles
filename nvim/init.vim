@@ -85,15 +85,13 @@ let mapleader="\<SPACE>"
 " <tab>: completion.
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-nmap <leader><leader> <c-^>
-
-nnoremap <leader>q :bdelete<cr>
-
 " Cycle through buffers.
 nnoremap <tab> :bnext!<cr>
 nnoremap <s-tab> :bprev!<cr>
-" Open buffer's list for selection.
-nnoremap gb :ls<cr>:b<space>
+
+nmap <leader><leader> <c-^>
+
+nnoremap <leader>q :bdelete<cr>
 
 nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlP<cr>
@@ -104,6 +102,13 @@ nnoremap <leader>j A{<esc>o}<esc>O
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
+nnoremap <silent> gh :call LanguageClient_textDocument_hover()<cr>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+nnoremap <silent> gr :call LanguageClient_textDocument_rename()<cr>
+
+" Open buffer's list for selection.
+nnoremap gb :ls<cr>:b<space>
+
 " Don't loose visual selection when using indent.
 xnoremap < <gv
 xnoremap > >gv
@@ -112,10 +117,6 @@ xnoremap > >gv
 inoremap <space> <space><c-g>u
 inoremap . .<c-g>u
 inoremap , ,<c-g>u
-
-nnoremap <silent> gh :call LanguageClient_textDocument_hover()<cr>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-nnoremap <silent> gr :call LanguageClient_textDocument_rename()<cr>
 
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256

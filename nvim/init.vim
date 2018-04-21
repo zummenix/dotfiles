@@ -96,9 +96,6 @@ nnoremap <leader>q :bdelete<cr>
 nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlP<cr>
 
-" The fastest way to insert curly braces?
-nnoremap <leader>j A{<esc>o}<esc>O
-
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 

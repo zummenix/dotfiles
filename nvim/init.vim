@@ -39,9 +39,10 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ }
 
-" deoplete
 let g:deoplete#enable_at_startup=1
 let g:deoplete#max_list=7
+
+let g:ctrlp_reuse_window='dirvish'
 
 set hidden
 set number

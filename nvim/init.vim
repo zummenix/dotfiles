@@ -25,6 +25,7 @@ Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
 Plug 'gluon-lang/vim-gluon'
 Plug 'sbdchd/neoformat'
+Plug 'sirver/ultisnips'
 call plug#end()
 
 let g:elm_setup_keybindings=0

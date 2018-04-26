@@ -23,6 +23,12 @@
         dest: "~/.duti"
         state: link
         force: yes
+    - name: symlink tig settings
+      file:
+        src: "{{ playbook_dir }}/tig/.tigrc"
+        dest: "~/.tigrc"
+        state: link
+        force: yes
     - name: clone repo with base16 colorscheme
       git:
         repo: "https://github.com/chriskempson/base16-shell.git"

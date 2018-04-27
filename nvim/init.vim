@@ -11,7 +11,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
-Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
 Plug 'chriskempson/base16-vim'
 Plug 'wincent/terminus'
 Plug 'wincent/ferret'
@@ -26,6 +25,8 @@ Plug 'henrik/vim-indexed-search'
 Plug 'gluon-lang/vim-gluon'
 Plug 'sbdchd/neoformat'
 Plug 'sirver/ultisnips'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 let g:elm_setup_keybindings=0
@@ -43,7 +44,7 @@ let g:LanguageClient_serverCommands = {
 let g:deoplete#enable_at_startup=1
 let g:deoplete#max_list=7
 
-let g:ctrlp_reuse_window='dirvish'
+let g:fzf_layout = { 'down': '~20%' }
 
 set hidden
 set number
@@ -94,9 +95,7 @@ nnoremap <s-tab> :bprev!<cr>
 nmap <leader><leader> <c-^>
 
 nnoremap <leader>q :bdelete<cr>
-
-nnoremap <leader>p :CtrlP<cr>
-nnoremap <leader>t :CtrlP<cr>
+nnoremap <leader>p :FZF<cr>
 
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>

@@ -96,6 +96,7 @@ nmap <leader><leader> <c-^>
 
 nnoremap <leader>q :bdelete<cr>
 nnoremap <leader>p :FZF<cr>
+nnoremap <leader>c "+
 
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>

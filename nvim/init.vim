@@ -85,18 +85,12 @@ set splitbelow
 
 let mapleader="\<SPACE>"
 
-" <tab>: completion.
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Cycle through buffers.
-nnoremap <tab> :bnext!<cr>
-nnoremap <s-tab> :bprev!<cr>
-
 nmap <leader><leader> <c-^>
 
 nnoremap <leader>q :bdelete<cr>
 nnoremap <leader>p :FZF<cr>
 nnoremap <leader>c "+
+nnoremap <leader>t :vnew<space><bar><space>terminal<cr>i
 
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
@@ -104,6 +98,13 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 nnoremap <silent> gh :call LanguageClient_textDocument_hover()<cr>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
 nnoremap <silent> gr :call LanguageClient_textDocument_rename()<cr>
+
+" <tab>: completion.
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" Cycle through buffers.
+nnoremap <tab> :bnext!<cr>
+nnoremap <s-tab> :bprev!<cr>
 
 " Open buffer's list for selection.
 nnoremap gb :ls<cr>:b<space>

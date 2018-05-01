@@ -7,8 +7,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
@@ -59,7 +57,33 @@ set completeopt=menu,preview,noinsert
 set cursorline
 set backspace=indent,start,eol
 set scrolloff=3
+
+" Configure status line.
+
+function! ModifiedStatus()
+    if &modified
+        return ' • '
+    else
+        return '   '
+    endif
+endfunction
+
+function! ReadOnlyStatus()
+    if &readonly
+        return ', readonly'
+    else
+        return ''
+    endif
+endfunction
+
 set laststatus=2
+set statusline=
+set statusline+=\ %f
+set statusline+=%{ReadOnlyStatus()}
+set statusline+=%{ModifiedStatus()}
+set statusline+=%y
+set statusline+=\ %q
+set statusline+=%=%l\:%-4.c\ %L
 
 " Configure tab indentation.
 set autoindent
@@ -122,6 +146,8 @@ if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
 endif
+
+hi StatusLine ctermbg=235
 
 augroup fmt
     autocmd!

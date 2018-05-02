@@ -29,12 +29,6 @@ call plug#end()
 
 let g:elm_setup_keybindings=0
 
-" Convenient jumps between splits.
-nmap <c-h> <c-w>h
-nmap <c-j> <c-w>j
-nmap <c-k> <c-w>k
-nmap <c-l> <c-w>l
-
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ }
@@ -97,6 +91,12 @@ filetype plugin indent on
 " Sane splits.
 set splitright
 set splitbelow
+
+" Convenient jumps between splits.
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
 
 let mapleader="\<SPACE>"
 

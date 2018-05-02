@@ -47,7 +47,6 @@ let g:fzf_layout = { 'down': '~20%' }
 set hidden
 set number
 set relativenumber
-set noshowmode
 set incsearch
 set ignorecase
 set smartcase

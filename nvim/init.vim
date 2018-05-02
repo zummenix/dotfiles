@@ -61,19 +61,11 @@ set scrolloff=3
 " Configure status line.
 
 function! ModifiedStatus()
-    if &modified
-        return ' • '
-    else
-        return '   '
-    endif
+    return &modified ? ' • ' : '   '
 endfunction
 
 function! ReadOnlyStatus()
-    if &readonly
-        return ', readonly'
-    else
-        return ''
-    endif
+    return &readonly ? ', readonly' : ''
 endfunction
 
 set laststatus=2

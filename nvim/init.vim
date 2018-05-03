@@ -7,8 +7,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
@@ -32,12 +30,6 @@ call plug#end()
 
 let g:elm_setup_keybindings=0
 
-" Convenient jumps between splits.
-nmap <c-h> <c-w>h
-nmap <c-j> <c-w>j
-nmap <c-k> <c-w>k
-nmap <c-l> <c-w>l
-
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ }
@@ -59,7 +51,6 @@ let g:ale_lint_on_text_changed='never'
 set hidden
 set number
 set relativenumber
-set noshowmode
 set incsearch
 set ignorecase
 set smartcase
@@ -69,7 +60,25 @@ set completeopt=menu,preview,noinsert
 set cursorline
 set backspace=indent,start,eol
 set scrolloff=3
+
+" Configure status line.
+
+function! ModifiedStatus()
+    return &modified ? ' • ' : '   '
+endfunction
+
+function! ReadOnlyStatus()
+    return &readonly ? ', readonly' : ''
+endfunction
+
 set laststatus=2
+set statusline=
+set statusline+=\ %f
+set statusline+=%{ReadOnlyStatus()}
+set statusline+=%{ModifiedStatus()}
+set statusline+=%y
+set statusline+=\ %q
+set statusline+=%=%l\:%-4.c\ %L
 
 " Configure tab indentation.
 set autoindent
@@ -93,19 +102,20 @@ filetype plugin indent on
 set splitright
 set splitbelow
 
+" Convenient jumps between splits.
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
+
 let mapleader="\<SPACE>"
-
-" <tab>: completion.
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Cycle through buffers.
-nnoremap <tab> :bnext!<cr>
-nnoremap <s-tab> :bprev!<cr>
 
 nmap <leader><leader> <c-^>
 
 nnoremap <leader>q :bdelete<cr>
 nnoremap <leader>p :FZF<cr>
+nnoremap <leader>c "+
+nnoremap <leader>t :vnew<space><bar><space>terminal<cr>i
 
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
@@ -113,6 +123,13 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 nnoremap <silent> gh :call LanguageClient_textDocument_hover()<cr>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
 nnoremap <silent> gr :call LanguageClient_textDocument_rename()<cr>
+
+" <tab>: completion.
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" Cycle through buffers.
+nnoremap <tab> :bnext!<cr>
+nnoremap <s-tab> :bprev!<cr>
 
 " Open buffer's list for selection.
 nnoremap gb :ls<cr>:b<space>
@@ -130,6 +147,8 @@ if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
 endif
+
+hi StatusLine ctermbg=235
 
 augroup fmt
     autocmd!

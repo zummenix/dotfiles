@@ -27,6 +27,7 @@ Plug 'sbdchd/neoformat'
 Plug 'sirver/ultisnips'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
 call plug#end()
 
 let g:elm_setup_keybindings=0
@@ -45,6 +46,15 @@ let g:deoplete#enable_at_startup=1
 let g:deoplete#max_list=7
 
 let g:fzf_layout = { 'down': '~20%' }
+
+" We should always use local prettier.
+let g:neoformat_javascript_prettier = {
+      \ 'exe': './node_modules/.bin/prettier',
+      \ 'args': ['--write'],
+      \ 'replace': 1
+      \ }
+
+let g:ale_lint_on_text_changed='never'
 
 set hidden
 set number

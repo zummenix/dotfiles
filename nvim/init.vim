@@ -112,10 +112,18 @@ let mapleader="\<SPACE>"
 
 nmap <leader><leader> <c-^>
 
+" There are probably better ways to do this.
+function! OpenAndConfigureMyTerminal()
+    execute "vnew | terminal"
+    execute "setlocal nonumber norelativenumber"
+    execute "tnoremap <buffer> <esc> <c-\\><c-n>"
+    execute "normal! i"
+endfunction
+
 nnoremap <leader>q :bdelete<cr>
 nnoremap <leader>p :FZF<cr>
 nnoremap <leader>c "+
-nnoremap <leader>t :vnew<space><bar><space>terminal<cr>i
+nnoremap <leader>t :call OpenAndConfigureMyTerminal()<cr>
 
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>

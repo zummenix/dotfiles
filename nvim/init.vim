@@ -121,7 +121,7 @@ function! OpenAndConfigureMyTerminal()
 endfunction
 
 nnoremap <leader>q :bdelete<cr>
-nnoremap <leader>p :FZF<cr>
+nnoremap <leader>p :GFiles<cr>
 nnoremap <leader>c "+
 nnoremap <leader>t :call OpenAndConfigureMyTerminal()<cr>
 

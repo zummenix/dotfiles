@@ -26,6 +26,7 @@ Plug 'sirver/ultisnips'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
+Plug 'purescript-contrib/purescript-vim'
 call plug#end()
 
 let g:elm_setup_keybindings=0

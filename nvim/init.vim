@@ -103,12 +103,6 @@ filetype plugin indent on
 set splitright
 set splitbelow
 
-" Convenient jumps between splits.
-nmap <c-h> <c-w>h
-nmap <c-j> <c-w>j
-nmap <c-k> <c-w>k
-nmap <c-l> <c-w>l
-
 let mapleader="\<SPACE>"
 
 nmap <leader><leader> <c-^>
@@ -121,9 +115,7 @@ function! OpenAndConfigureMyTerminal()
     execute "normal! i"
 endfunction
 
-nnoremap <leader>q :bdelete<cr>
 nnoremap <leader>p :GFiles<cr>
-nnoremap <leader>c "+
 nnoremap <leader>t :call OpenAndConfigureMyTerminal()<cr>
 
 " Redraw the window.
@@ -133,19 +125,11 @@ nnoremap <silent> gh :call LanguageClient_textDocument_hover()<cr>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
 nnoremap <silent> gr :call LanguageClient_textDocument_rename()<cr>
 
-" <tab>: completion.
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Cycle through buffers.
-nnoremap <tab> :bnext!<cr>
-nnoremap <s-tab> :bprev!<cr>
-
 " Open buffer's list for selection.
 nnoremap gb :ls<cr>:b<space>
 
-" Don't loose visual selection when using indent.
-xnoremap < <gv
-xnoremap > >gv
+" <tab>: completion.
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Add more granularity to undo history.
 inoremap <space> <space><c-g>u

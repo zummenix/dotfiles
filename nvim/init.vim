@@ -105,7 +105,7 @@ set splitbelow
 
 let mapleader="\<SPACE>"
 
-nmap <leader><leader> <c-^>
+nmap <leader><leader> <c-w>
 
 " There are probably better ways to do this.
 function! OpenAndConfigureMyTerminal()

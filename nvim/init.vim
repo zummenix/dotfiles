@@ -72,6 +72,18 @@ function! ReadOnlyStatus()
     return &readonly ? ', readonly' : ''
 endfunction
 
+function! LinterErrorStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    return l:all_errors == 0 ? '' : printf('E:%d', l:all_errors)
+endfunction
+
+function! LinterWarningStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_warnings = l:counts.warning + l:counts.style_warning
+    return l:all_warnings == 0 ? '' : printf('W:%d', l:all_warnings)
+endfunction
+
 set laststatus=2
 set statusline=
 set statusline+=\ %f
@@ -79,6 +91,8 @@ set statusline+=%{ReadOnlyStatus()}
 set statusline+=%{ModifiedStatus()}
 set statusline+=%y
 set statusline+=\ %q
+set statusline+=\ %{LinterErrorStatus()}
+set statusline+=\ %{LinterWarningStatus()}
 set statusline+=%=%l\:%-4.c\ %L
 
 " Configure tab indentation.

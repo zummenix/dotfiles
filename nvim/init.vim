@@ -158,11 +158,11 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 if filereadable(expand("~/.vimrc_background"))
-    let base16colorspace=256
+    set termguicolors
     source ~/.vimrc_background
 endif
 
-hi StatusLine ctermbg=235
+hi StatusLine ctermfg=12 ctermbg=11 guifg=#a7adba guibg=#21252e
 
 augroup fmt
     autocmd!

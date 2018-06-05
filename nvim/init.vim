@@ -48,6 +48,7 @@ let g:neoformat_javascript_prettier = {
       \ }
 
 let g:ale_lint_on_text_changed='never'
+let g:ale_linters={'rust': []}
 
 set hidden
 set number

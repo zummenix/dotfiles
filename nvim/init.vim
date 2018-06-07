@@ -49,6 +49,11 @@ let g:neoformat_javascript_prettier = {
 
 let g:ale_lint_on_text_changed='never'
 let g:ale_linters={'rust': []}
+let g:ale_sign_error='•'
+let g:ale_sign_info='•'
+let g:ale_sign_style_error='•'
+let g:ale_sign_style_warning='•'
+let g:ale_sign_warning='•'
 
 set hidden
 set number
@@ -164,6 +169,7 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 hi StatusLine ctermfg=12 ctermbg=11 guifg=#a7adba guibg=#21252e
+hi Error ctermfg=1 ctermbg=10 guifg=#bf616a guibg=#343d46
 
 augroup fmt
     autocmd!

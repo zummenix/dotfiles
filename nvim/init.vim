@@ -48,6 +48,12 @@ let g:neoformat_javascript_prettier = {
       \ 'replace': 1
       \ }
 
+let g:neoformat_typescript_prettier = {
+      \ 'exe': './node_modules/.bin/prettier',
+      \ 'args': ['--write'],
+      \ 'replace': 1
+      \ }
+
 let g:ale_lint_on_text_changed='never'
 let g:ale_linters={'rust': []}
 let g:ale_sign_error='•'

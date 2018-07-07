@@ -134,12 +134,11 @@ let mapleader="\<SPACE>"
 
 nmap <leader><leader> <c-w>
 
-" There are probably better ways to do this.
 function! OpenAndConfigureMyTerminal()
-    execute "vnew | terminal"
-    execute "setlocal nonumber norelativenumber"
-    execute "tnoremap <buffer> <esc> <c-\\><c-n>"
-    execute "normal! i"
+    vnew | terminal
+    setlocal nonumber norelativenumber
+    tnoremap <buffer> <esc> <c-\><c-n>
+    startinsert
 endfunction
 
 nnoremap <leader>p :GFiles<cr>

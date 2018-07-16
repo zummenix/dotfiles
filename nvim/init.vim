@@ -142,6 +142,7 @@ function! OpenAndConfigureMyTerminal()
 endfunction
 
 nnoremap <leader>p :GFiles<cr>
+nnoremap <leader>P :Files<cr>
 nnoremap <leader>t :call OpenAndConfigureMyTerminal()<cr>
 
 " Redraw the window.

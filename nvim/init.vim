@@ -54,6 +54,8 @@ let g:neoformat_typescript_prettier = {
       \ 'replace': 1
       \ }
 
+let g:neoformat=1
+
 let g:ale_lint_on_text_changed='never'
 let g:ale_linters={'rust': []}
 let g:ale_sign_error='•'
@@ -211,8 +213,14 @@ endif
 hi StatusLine ctermfg=12 ctermbg=11 guifg=#a7adba guibg=#21252e
 hi Error ctermfg=1 ctermbg=10 guifg=#bf616a guibg=#343d46
 
+function! MyNeoformant()
+    if g:neoformat
+        Neoformat
+    endif
+endfunction
+
 augroup fmt
     autocmd!
-    autocmd BufWritePre * Neoformat
+    autocmd BufWritePre * call MyNeoformant()
 augroup END
 

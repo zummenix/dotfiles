@@ -2,11 +2,6 @@ language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'rust-lang/rust.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
@@ -22,7 +17,6 @@ Plug 'pearofducks/ansible-vim'
 Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
 Plug 'gluon-lang/vim-gluon'
-Plug 'sbdchd/neoformat'
 Plug 'sirver/ultisnips'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -32,32 +26,22 @@ call plug#end()
 
 let g:elm_setup_keybindings=0
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ }
-
-let g:deoplete#enable_at_startup=1
-let g:deoplete#max_list=7
-
 let g:fzf_layout = { 'down': '~20%' }
 
-" We should always use local prettier.
-let g:neoformat_javascript_prettier = {
-      \ 'exe': './node_modules/.bin/prettier',
-      \ 'args': ['--write'],
-      \ 'replace': 1
-      \ }
+let g:ale_fixers = {
+\   'rust': ['rustfmt'],
+\}
 
-let g:neoformat_typescript_prettier = {
-      \ 'exe': './node_modules/.bin/prettier',
-      \ 'args': ['--write'],
-      \ 'replace': 1
-      \ }
-
-let g:neoformat=1
+let g:ale_linters = {
+            \ 'rust': ['rls'],
+            \}
 
 let g:ale_lint_on_text_changed='never'
-let g:ale_linters={'rust': []}
+let g:ale_completion_enabled=1
+let g:ale_completion_delay=200
+let g:ale_completion_max_suggestions=7
+let g:ale_fix_on_save=1
+
 let g:ale_sign_error='•'
 let g:ale_sign_info='•'
 let g:ale_sign_style_error='•'
@@ -66,8 +50,6 @@ let g:ale_sign_warning='•'
 
 let g:UltiSnipsExpandTrigger="<NUL>"
 let g:UltiSnipsListSnippets="<NUL>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 set hidden
 set number
@@ -77,7 +59,7 @@ set ignorecase
 set smartcase
 set nohlsearch
 set signcolumn=yes
-set completeopt=menu,preview,noinsert
+set completeopt=menu,menuone,preview,noinsert
 set cursorline
 set backspace=indent,start,eol
 set scrolloff=3
@@ -148,6 +130,15 @@ function! OpenAndConfigureMyTerminal()
     startinsert
 endfunction
 
+function! TabCompleteOrTab()
+    " Check if its looks like possible to complete.
+    if searchpos('[_a-zA-Z0-9.(]\%#', 'nb') != [0, 0]
+        return "\<c-n>"
+    else
+        return "\<tab>"
+    endif
+endfunction
+
 nnoremap <leader>p :GFiles<cr>
 nnoremap <leader>P :Files<cr>
 nnoremap <leader>t :call OpenAndConfigureMyTerminal()<cr>
@@ -155,15 +146,16 @@ nnoremap <leader>t :call OpenAndConfigureMyTerminal()<cr>
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
-nnoremap <silent> gh :call LanguageClient_textDocument_hover()<cr>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-nnoremap <silent> gr :call LanguageClient_textDocument_rename()<cr>
+nnoremap <silent> gh :ALEHover<cr>
+nnoremap <silent> gd :ALEGoToDefinition<cr>
+nnoremap <silent> gr :ALEFindReferences<cr>
 
 " Open buffer's list for selection.
 nnoremap gb :ls<cr>:b<space>
 
 " <tab>: completion.
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent> <expr> <tab> TabCompleteOrTab()
+inoremap <silent> <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u<cr>"
 
 " Add more granularity to undo history.
 inoremap <space> <space><c-g>u
@@ -177,33 +169,6 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-let g:ulti_expand_res = 0 "default value, just set once
-function! CompleteSnippet()
-  if empty(v:completed_item)
-    return
-  endif
-
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res > 0
-    return
-  endif
-
-  let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
-  let l:comp_len = len(l:complete)
-
-  let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
-  let l:cur_line = getline('.')
-
-  let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
-  let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
-
-  call setline('.', l:start . l:end)
-  call cursor('.', l:cur_col - l:comp_len + 2)
-
-  call UltiSnips#Anon(l:complete)
-endfunction
-
-autocmd CompleteDone * call CompleteSnippet()
 
 if filereadable(expand("~/.vimrc_background"))
     set termguicolors
@@ -212,15 +177,4 @@ endif
 
 hi StatusLine ctermfg=12 ctermbg=11 guifg=#a7adba guibg=#21252e
 hi Error ctermfg=1 ctermbg=10 guifg=#bf616a guibg=#343d46
-
-function! MyNeoformant()
-    if g:neoformat
-        Neoformat
-    endif
-endfunction
-
-augroup fmt
-    autocmd!
-    autocmd BufWritePre * call MyNeoformant()
-augroup END
 

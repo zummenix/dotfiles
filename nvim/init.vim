@@ -66,11 +66,11 @@ set scrolloff=3
 
 " Configure status line.
 
-function! ModifiedStatus()
+function! ModifiedStatus() abort
     return &modified ? ' • ' : '   '
 endfunction
 
-function! ReadOnlyStatus()
+function! ReadOnlyStatus() abort
     return &readonly ? ', readonly' : ''
 endfunction
 
@@ -123,14 +123,14 @@ let mapleader="\<SPACE>"
 
 nmap <leader><leader> <c-w>
 
-function! OpenAndConfigureMyTerminal()
+function! OpenAndConfigureMyTerminal() abort
     vnew | terminal
     setlocal nonumber norelativenumber
     tnoremap <buffer> <esc> <c-\><c-n>
     startinsert
 endfunction
 
-function! TabCompleteOrTab()
+function! TabCompleteOrTab() abort
     " Check if its looks like possible to complete.
     if searchpos('[_a-zA-Z0-9.(]\%#', 'nb') != [0, 0]
         return "\<c-n>"

@@ -17,7 +17,6 @@ Plug 'pearofducks/ansible-vim'
 Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
 Plug 'gluon-lang/vim-gluon'
-Plug 'sirver/ultisnips'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
@@ -47,9 +46,6 @@ let g:ale_sign_info='•'
 let g:ale_sign_style_error='•'
 let g:ale_sign_style_warning='•'
 let g:ale_sign_warning='•'
-
-let g:UltiSnipsExpandTrigger="<NUL>"
-let g:UltiSnipsListSnippets="<NUL>"
 
 set hidden
 set number

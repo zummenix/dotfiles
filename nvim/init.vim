@@ -29,11 +29,14 @@ let g:fzf_layout = { 'down': '~20%' }
 
 let g:ale_fixers = {
 \   'rust': ['rustfmt'],
+\   'typescript': ['prettier'],
+\   'javascript': ['prettier'],
 \}
 
 let g:ale_linters = {
-            \ 'rust': ['rls'],
-            \}
+\   'rust': ['rls'],
+\   'typescript': ['tslint', 'tsserver'],
+\}
 
 let g:ale_lint_on_text_changed='never'
 let g:ale_completion_enabled=1

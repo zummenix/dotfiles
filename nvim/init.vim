@@ -149,8 +149,8 @@ nnoremap <silent> gh :ALEHover<cr>
 nnoremap <silent> gd :ALEGoToDefinition<cr>
 nnoremap <silent> gr :ALEFindReferences<cr>
 
-" Open buffer's list for selection.
-nnoremap gb :ls<cr>:b<space>
+" Open fzf's buffers list.
+nnoremap gb :Buffers<enter>
 
 " <tab>: completion.
 inoremap <silent> <expr> <tab> TabCompleteOrTab()

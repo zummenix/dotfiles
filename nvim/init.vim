@@ -122,8 +122,8 @@ let mapleader="\<SPACE>"
 
 nmap <leader><leader> <c-w>
 
-function! OpenAndConfigureMyTerminal() abort
-    vnew | terminal
+function! OpenAndConfigureMyTerminal(vertical) abort
+    if a:vertical | vnew | else | new | endif | terminal
     setlocal nonumber norelativenumber
     tnoremap <buffer> <esc> <c-\><c-n>
     startinsert
@@ -140,7 +140,8 @@ endfunction
 
 nnoremap <leader>p :GFiles<cr>
 nnoremap <leader>P :Files<cr>
-nnoremap <leader>t :call OpenAndConfigureMyTerminal()<cr>
+nnoremap <leader>t :call OpenAndConfigureMyTerminal(1)<cr>
+nnoremap <leader>T :call OpenAndConfigureMyTerminal(0)<cr>
 
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>

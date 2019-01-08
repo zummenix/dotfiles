@@ -1,20 +1,20 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
+# The script uses the ImageMagic's `convert` tool to resize app icons.
 
 from subprocess import call
-import os
 
 def format_name(size, scale):
-    return str(size) + "@" + str(scale) + "x"
+    return str(size) + "@" + str(scale) + "x" + ".png"
+
+def test_format_name():
+    assert format_name(24, 2) == "24@2x.png"
 
 def resize(size, scale):
-    name = format_name(size, scale)
-    file_name = name + ".png"
-    file_path = name + "/" + file_name
-    call(["mkdir", name])
-    call(["cp", "icon.png", file_path])
-    call(["sips", "-Z", str(int(size * scale)), file_path])
-    call(["mv", file_path, "."])
-    call(["rm", "-rf", name])
+    file_name = format_name(size, scale)
+    print(file_name)
+    side = str(int(size * scale))
+    call(["convert", "icon.png", "-resize", side + "x" + side, file_name])
 
 def sizes():
     return [

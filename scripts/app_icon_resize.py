@@ -14,7 +14,7 @@ def resize(size, scale):
     file_name = format_name(size, scale)
     print(file_name)
     side = str(int(size * scale))
-    call(["convert", "icon.png", "-resize", side + "x" + side, file_name])
+    call(["convert", "icon.png", "-alpha", "off", "-resize", side + "x" + side, file_name])
 
 def sizes():
     return [

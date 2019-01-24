@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 
-fg = '\033[38;5;'
-bg = '\033[48;5;'
-
 def format_color(index):
-    n = str(index)
-    fgstr = fg + n + 'm' + n + '\t'
-    bgstr = bg + n + 'm' + 'XXXXX'
+    value = str(index)
+    fgstr = '\033[38;5;' + value + 'm' + value + '\t'
+    bgstr = '\033[48;5;' + value + 'm' + 'XXXXX'
     return fgstr + bgstr + '\033[0m'
 
 def test_format_color():

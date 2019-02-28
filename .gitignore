@@ -1,3 +1,4 @@
 *.retry
 fish/fishd.*
+fish/fish_variables
 *.pyc

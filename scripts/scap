@@ -27,6 +27,7 @@ if test "$DESTINATION" = "c"; then
     osascript -e "set the clipboard to (read (POSIX file \"$FILE_PATH\") as JPEG picture)"
     echo "Copied to clipboard"
 elif test "$DESTINATION" = "u"; then
+    echo "Uploading..."
     scp -P 2221 "$FILE_PATH" AlekseyKuznetsov@jing.saritasa.com:/
     open "https://jing.saritasa.com/AlekseyKuznetsov/$FILE_NAME"
 fi

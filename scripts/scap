@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+
+FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
+DIR="$HOME/Desktop/Screenshots"
+
+if ! test -d "$DIR"; then
+    mkdir "$DIR"
+fi
+
+FILE_PATH="$DIR/$FILE_NAME"
+
+echo "Capture screen interactively, by selection or window."
+echo "The space key will toggle between mouse selection and window selection modes."
+echo "The escape key will cancel the interactive screen shot."
+screencapture -i "$FILE_PATH"
+if ! test -s "$FILE_PATH"; then
+    exit 0
+fi
+
+open -n -W -a "Preview" "$FILE_PATH"
+
+read -p "Copy to clipboard or Upload using SFTP (c/u)?: " DESTINATION
+
+if test "$DESTINATION" = "c"; then
+    osascript -e "set the clipboard to (read (POSIX file \"$FILE_PATH\") as JPEG picture)"
+    echo "Copied to clipboard"
+elif test "$DESTINATION" = "u"; then
+    scp -P 2221 "$FILE_PATH" AlekseyKuznetsov@jing.saritasa.com:/
+    open "https://jing.saritasa.com/AlekseyKuznetsov/$FILE_NAME"
+fi
+

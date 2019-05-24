@@ -11,9 +11,8 @@ fi
 
 FILE_PATH="$DIR/$FILE_NAME"
 
-echo "Capture screen interactively, by selection or window."
-echo "The space key will toggle between mouse selection and window selection modes."
-echo "The escape key will cancel the interactive screen shot."
+echo "Space key - mouse selection/window selection."
+echo "Screenshot will be open in the Preview.app. Quit (Cmd+Q) the Preview.app to continue."
 screencapture -i "$FILE_PATH"
 if ! test -s "$FILE_PATH"; then
     exit 0

@@ -2,6 +2,24 @@
 
 set -e
 
+# scap allows you to take a screenshot, add a markup to it in the Preview.app and
+# share by uploading it using SFTP.
+# Dependencies:
+# - screencapture - takes and saves a screenshot
+# - Preview.app - allows to add a markup to a screenshot.
+# - scp - copy a screenshot securely to a server (SFTP).
+# - osascript - integration with the system using AppleScript
+
+# Screenshots' directory and file name format configuration.
+DIR="$HOME/Desktop/Screenshots"
+FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
+FILE_PATH="$DIR/$FILE_NAME"
+
+# SFTP sharing configuration.
+SFTP_PORT=2221
+SFTP_USER=AlekseyKuznetsov
+SFTP_HOST=jing.saritasa.com
+
 # Pass the PID as the 1st (and only) argument.
 activate_by_pid() {
   osascript -e "
@@ -13,10 +31,6 @@ activate_by_pid() {
     end tell
   "
 }
-
-DIR="$HOME/Desktop/Screenshots"
-FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
-FILE_PATH="$DIR/$FILE_NAME"
 
 # Make sure that the output directory exist and create one if not.
 if ! test -d "$DIR"; then
@@ -47,7 +61,7 @@ if test "$DESTINATION" = "c"; then
     echo "Copied to clipboard"
 elif test "$DESTINATION" = "u"; then
     echo "Uploading..."
-    scp -P 2221 "$FILE_PATH" AlekseyKuznetsov@jing.saritasa.com:/
-    open "https://jing.saritasa.com/AlekseyKuznetsov/$FILE_NAME"
+    scp -P $SFTP_PORT "$FILE_PATH" "$SFTP_USER@$SFTP_HOST:/"
+    open "https://$SFTP_HOST/$SFTP_USER/$FILE_NAME"
 fi
 

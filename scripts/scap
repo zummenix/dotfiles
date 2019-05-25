@@ -2,6 +2,18 @@
 
 set -e
 
+# Pass the PID as the 1st (and only) argument.
+activate_by_pid() {
+  osascript -e "
+    tell application \"System Events\"
+      set theprocs to every process whose unix id is ${1}
+      repeat with proc in theprocs
+        set the frontmost of proc to true
+      end repeat
+    end tell
+  "
+}
+
 FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
 DIR="$HOME/Desktop/Screenshots"
 
@@ -19,6 +31,11 @@ if ! test -s "$FILE_PATH"; then
 fi
 
 open -n -W -a "Preview" "$FILE_PATH"
+
+PARENT_PID=$(ps -o ppid | sed -n "2p")
+if test -n "$PARENT_PID"; then
+    activate_by_pid "$PARENT_PID"
+fi
 
 read -p "Copy to clipboard or Upload using SFTP (c/u)?: " DESTINATION
 

@@ -55,11 +55,16 @@ if test -n "$PARENT_PID"; then
     activate_by_pid "$PARENT_PID"
 fi
 
-read -p "Copy to clipboard or Upload using SFTP (c/u)?: " DESTINATION
-if test "$DESTINATION" = "c"; then
+# Ask sharing options.
+echo ""
+echo "How do you want to share the screenshot?"
+echo "c - copy to clipboard"
+echo "u - upload using sftp"
+read -p "[c/u]: " SHARING_OPTION
+if test "$SHARING_OPTION" = "c"; then
     osascript -e "set the clipboard to (read (POSIX file \"$FILE_PATH\") as JPEG picture)"
     echo "Copied to clipboard"
-elif test "$DESTINATION" = "u"; then
+elif test "$SHARING_OPTION" = "u"; then
     echo "Uploading..."
     scp -P $SFTP_PORT "$FILE_PATH" "$SFTP_USER@$SFTP_HOST:/"
     open "https://$SFTP_HOST/$SFTP_USER/$FILE_NAME"

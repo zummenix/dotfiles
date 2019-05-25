@@ -7,6 +7,11 @@
 # - Preview.app - allows to add a markup to a screenshot
 # - scp - copy a screenshot securely to a server (SFTP)
 # - osascript - integration with the system using AppleScript
+#
+# Usage:
+#
+# scap [last]
+#   last - takes the last screenshot and continues with it.
 
 set -e
 
@@ -37,12 +42,22 @@ if ! test -d "$DIR"; then
     mkdir "$DIR"
 fi
 
-# Start screen capture.
-echo "You can take a screenshot now! Hit Space key to toggle mouse/window selection."
-echo "Screenshot will be open in the Preview.app. Quit (Cmd+Q) the Preview.app to continue."
-screencapture -i "$FILE_PATH"
-if ! test -s "$FILE_PATH"; then
-    exit 0
+if test "$1" = "last"; then
+    # Search the last taken screenshot and continue with it.
+    FILE_PATH=$(ls -1t "$DIR/"*.png | sed -n "1p")
+    if test -z "$FILE_PATH"; then
+        echo "There are no screenshots in $DIR"
+        exit 1
+    fi
+    echo "Last taken screenshot is $FILE_PATH"
+else
+    # Start screen capture.
+    echo "You can take a screenshot now! Hit Space key to toggle mouse/window selection."
+    echo "Screenshot will be open in the Preview.app. Quit (Cmd+Q) the Preview.app to continue."
+    screencapture -i "$FILE_PATH"
+    if ! test -s "$FILE_PATH"; then
+        exit 0
+    fi
 fi
 
 # Open the Preview.app with a screenshot and wait for user to quit it.

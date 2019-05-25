@@ -14,31 +14,34 @@ activate_by_pid() {
   "
 }
 
-FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
 DIR="$HOME/Desktop/Screenshots"
+FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
+FILE_PATH="$DIR/$FILE_NAME"
 
+# Make sure that the output directory exist and create one if not.
 if ! test -d "$DIR"; then
     mkdir "$DIR"
 fi
 
-FILE_PATH="$DIR/$FILE_NAME"
-
-echo "Space key - mouse selection/window selection."
+# Start screen capture.
+echo "You can take a screenshot now! Hit Space key to toggle mouse/window selection."
 echo "Screenshot will be open in the Preview.app. Quit (Cmd+Q) the Preview.app to continue."
 screencapture -i "$FILE_PATH"
 if ! test -s "$FILE_PATH"; then
     exit 0
 fi
 
+# Open the Preview.app with a screenshot and wait for user to quit it.
 open -n -W -a "Preview" "$FILE_PATH"
 
+# Find PID of a terminal app where the script is running and bring it to the front.
+# We assume that PID will be the first line (apart from header) of `ps -o ppid` command.
 PARENT_PID=$(ps -o ppid | sed -n "2p")
 if test -n "$PARENT_PID"; then
     activate_by_pid "$PARENT_PID"
 fi
 
 read -p "Copy to clipboard or Upload using SFTP (c/u)?: " DESTINATION
-
 if test "$DESTINATION" = "c"; then
     osascript -e "set the clipboard to (read (POSIX file \"$FILE_PATH\") as JPEG picture)"
     echo "Copied to clipboard"

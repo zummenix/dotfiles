@@ -4,10 +4,10 @@ set -e
 
 # scap allows you to take a screenshot, add a markup to it in the Preview.app and
 # share by uploading it using SFTP.
-# Dependencies:
+# Dependencies (all available on mac os):
 # - screencapture - takes and saves a screenshot
-# - Preview.app - allows to add a markup to a screenshot.
-# - scp - copy a screenshot securely to a server (SFTP).
+# - Preview.app - allows to add a markup to a screenshot
+# - scp - copy a screenshot securely to a server (SFTP)
 # - osascript - integration with the system using AppleScript
 
 # Screenshots' directory and file name format configuration.

@@ -2,14 +2,14 @@
 
 # scap allows you to take a screenshot, add a markup to it in the Preview.app and
 # share it by copying to clipboard or uploading it using SFTP.
+#
 # Dependencies (all available on mac os without additonal installation):
 # - screencapture - takes and saves a screenshot
 # - Preview.app - allows to add a markup to a screenshot
-# - scp - copy a screenshot securely to a server (SFTP)
 # - osascript - integration with the system using AppleScript
+# - scp - copy a screenshot securely to a server (SFTP)
 #
 # Usage:
-#
 # scap [last]
 #   last - takes the last screenshot and continues with it.
 
@@ -25,7 +25,8 @@ SFTP_PORT=2221
 SFTP_USER=AlekseyKuznetsov
 SFTP_HOST=jing.saritasa.com
 
-# Pass the PID as the 1st (and only) argument.
+# Activates an app by a PID.
+# Pass the PID as the first argument.
 activate_by_pid() {
   osascript -e "
     tell application \"System Events\"
@@ -49,7 +50,7 @@ if test "$1" = "last"; then
         echo "There are no screenshots in $DIR"
         exit 1
     fi
-    echo "Last taken screenshot is $FILE_PATH"
+    echo "Using $FILE_PATH"
 else
     # Start screen capture.
     echo "You can take a screenshot now! Hit Space key to toggle mouse/window selection."

@@ -56,9 +56,11 @@ if test "$1" = "last"; then
     fi
     echo "Using $FILE_PATH"
 elif test "$1" = "list"; then
+    # Just list all screenshots.
     find "$DIR" -name '*.png'
     exit
 elif test "$1" = "clean"; then
+    # Ask and remove all screenshots.
     read -p "Do you want to remove all screenshots? [yes/no]: " WANT_TO_REMOVE
     if test "$WANT_TO_REMOVE" = "yes" -o "$WANT_TO_REMOVE" = "y"; then
         rm "$DIR"/*.png
@@ -79,14 +81,13 @@ fi
 open -n -W -a "Preview" "$FILE_PATH"
 
 # Find PID of a terminal app where the script is running and bring it to the front.
-# We assume that PID will be the first line (apart from header) of `ps -o ppid` command.
+# We assume that PID will be the first line (apart from header) of `ps` command.
 PARENT_PID=$(ps -T -o ppid | sed -n "2p")
 if test -n "$PARENT_PID"; then
     activate_by_pid "$PARENT_PID"
 fi
 
 # Ask sharing options.
-echo ""
 echo "How do you want to share the screenshot?"
 echo "c - copy to clipboard"
 echo "u - upload using sftp"

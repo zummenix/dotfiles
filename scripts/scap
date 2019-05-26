@@ -10,8 +10,11 @@
 # - scp - copy a screenshot securely to a server (SFTP)
 #
 # Usage:
-# scap [last]
+# scap [COMMAND]
+#
+# Commands:
 #   last - takes the last screenshot and continues with it.
+#   list - list screenshots in a directory.
 
 set -e
 
@@ -51,6 +54,9 @@ if test "$1" = "last"; then
         exit 1
     fi
     echo "Using $FILE_PATH"
+elif test "$1" = "list"; then
+    find "$DIR" -name '*.png'
+    exit 0
 else
     # Start screen capture.
     echo "You can take a screenshot now! Hit Space key to toggle mouse/window selection."

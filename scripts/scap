@@ -14,7 +14,8 @@
 #
 # Commands:
 #   last - takes the last screenshot and continues with it.
-#   list - list screenshots in a directory.
+#   list - list screenshots in the directory with screenshots.
+#   clean - remove all screenshots in the directory with screenshots.
 
 set -e
 
@@ -56,6 +57,13 @@ if test "$1" = "last"; then
     echo "Using $FILE_PATH"
 elif test "$1" = "list"; then
     find "$DIR" -name '*.png'
+    exit
+elif test "$1" = "clean"; then
+    read -p "Do you want to remove all screenshots? [yes/no]: " WANT_TO_REMOVE
+    if test "$WANT_TO_REMOVE" = "yes" -o "$WANT_TO_REMOVE" = "y"; then
+        rm "$DIR"/*.png
+        exit
+    fi
     exit 0
 else
     # Start screen capture.

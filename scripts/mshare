@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# The script transfers provided *.png or *.mov files using SFTP.
+#
+# Dependencies (all available on mac os without additonal installation):
+# - open - open a link in a browser
+# - scp - copy a media file securely to a server (SFTP)
+#
+# Usage:
+# mshare file
+
+set -e
+
+# SFTP sharing configuration.
+SFTP_PORT=2221
+SFTP_USER=AlekseyKuznetsov
+SFTP_HOST=jing.saritasa.com
+
+# Directory and file name format configuration.
+if echo "$1" | grep -Ie ".*.png" > /dev/null; then
+    DIR="$HOME/Desktop/Screenshots"
+    FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
+elif echo "$1" | grep -Ie ".*.mov" > /dev/null; then
+    DIR="$HOME/Desktop/Screenrecordings"
+    FILE_NAME=$(date "+Screenrecording-%Y-%m-%d-%H-%M-%S.mov")
+else
+    exit 1
+fi
+
+FILE_PATH="$DIR/$FILE_NAME"
+
+# Make sure that the output directory exist and create one if not.
+if ! test -d "$DIR"; then
+    mkdir "$DIR"
+fi
+
+cp "$1" "$FILE_PATH"
+echo "Uploading..."
+scp -P $SFTP_PORT "$FILE_PATH" "$SFTP_USER@$SFTP_HOST:/"
+open "https://$SFTP_HOST/$SFTP_USER/$FILE_NAME"

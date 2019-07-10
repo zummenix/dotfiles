@@ -2,7 +2,7 @@
 
 run_clean() {
     DIR=$(dirname "$1")
-    du -hd0 "$DIR"
+    du -hs "$DIR"
     pushd "$DIR" > /dev/null && cargo clean
     popd > /dev/null
     du -hd0 "$DIR"

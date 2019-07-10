@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
+dir_size() {
+    du -hs "$1"
+}
+export -f dir_size
+
 run_clean() {
     DIR=$(dirname "$1")
-    du -hs "$DIR"
-    pushd "$DIR" > /dev/null && cargo clean
-    popd > /dev/null
-    du -hd0 "$DIR"
+    dir_size "$DIR"
+    cargo clean --verbose --manifest-path "$1"
+    dir_size "$DIR"
 }
 export -f run_clean
 

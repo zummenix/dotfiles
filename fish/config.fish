@@ -1,6 +1,7 @@
 set -Ux EDITOR nvim
 set PATH "$HOME/.cargo/bin" $PATH
 set PATH "$HOME/projects/dotfiles/scripts" $PATH
+set -Ux LC_ALL "en_US.UTF-8"
 
 if status --is-interactive
     eval sh $HOME/.config/base16-shell/scripts/base16-ocean.sh

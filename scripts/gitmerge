@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git branch | fzf | rg -v "^\*" | xargs git merge

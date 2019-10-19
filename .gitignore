@@ -2,3 +2,4 @@
 fish/fishd.*
 fish/fish_variables
 *.pyc
+__pycache__/

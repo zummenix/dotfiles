@@ -1,7 +1,6 @@
 language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'rust-lang/rust.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'

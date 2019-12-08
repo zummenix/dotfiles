@@ -132,7 +132,7 @@ function! OpenAndConfigureMyTerminal(vertical) abort
 endfunction
 
 function! TabCompleteOrTab() abort
-    " Check if its looks like possible to complete.
+    " Check if it looks like possible to complete.
     if searchpos('[_a-zA-Z0-9.(]\%#', 'nb') != [0, 0]
         return "\<c-n>"
     else

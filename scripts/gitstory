@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+fzf | xargs -I{} git log -p -M --follow --stat -- "{}"
+

@@ -18,39 +18,14 @@ Plug 'henrik/vim-indexed-search'
 Plug 'gluon-lang/vim-gluon'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale'
 Plug 'purescript-contrib/purescript-vim'
 Plug 'keith/swift.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 let g:elm_setup_keybindings=0
 
 let g:fzf_layout = { 'down': '~20%' }
-
-let g:ale_fixers = {
-\   'rust': ['rustfmt'],
-\   'typescript': ['prettier'],
-\   'javascript': ['prettier'],
-\   'python': [],
-\}
-
-let g:ale_linters = {
-\   'rust': ['rls'],
-\   'typescript': ['tslint', 'tsserver'],
-\   'python': [],
-\}
-
-let g:ale_lint_on_text_changed='never'
-let g:ale_completion_enabled=1
-let g:ale_completion_delay=200
-let g:ale_completion_max_suggestions=7
-let g:ale_fix_on_save=1
-
-let g:ale_sign_error='•'
-let g:ale_sign_info='•'
-let g:ale_sign_style_error='•'
-let g:ale_sign_style_warning='•'
-let g:ale_sign_warning='•'
 
 set hidden
 set number
@@ -64,6 +39,7 @@ set completeopt=menu,menuone,preview,noinsert
 set cursorline
 set backspace=indent,start,eol
 set scrolloff=3
+set shortmess+=c
 
 " Configure status line.
 
@@ -75,16 +51,17 @@ function! ReadOnlyStatus() abort
     return &readonly ? ', readonly' : ''
 endfunction
 
-function! LinterErrorStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    return l:all_errors == 0 ? '' : printf('E:%d', l:all_errors)
-endfunction
-
-function! LinterWarningStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_warnings = l:counts.warning + l:counts.style_warning
-    return l:all_warnings == 0 ? '' : printf('W:%d', l:all_warnings)
+function! StatusDiagnostic() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    let msgs = []
+    if get(info, 'error', 0)
+        call add(msgs, 'E:' . info['error'])
+    endif
+    if get(info, 'warning', 0)
+        call add(msgs, 'W:' . info['warning'])
+    endif
+    return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
 
 set laststatus=2
@@ -94,8 +71,7 @@ set statusline+=%{ReadOnlyStatus()}
 set statusline+=%{ModifiedStatus()}
 set statusline+=%y
 set statusline+=\ %q
-set statusline+=\ %{LinterErrorStatus()}
-set statusline+=\ %{LinterWarningStatus()}
+set statusline+=\ %{StatusDiagnostic()}
 set statusline+=%=%l\:%-4.c\ %L
 
 " Configure tab indentation.
@@ -131,15 +107,6 @@ function! OpenAndConfigureMyTerminal(vertical) abort
     startinsert
 endfunction
 
-function! TabCompleteOrTab() abort
-    " Check if it looks like possible to complete.
-    if searchpos('[_a-zA-Z0-9.(]\%#', 'nb') != [0, 0]
-        return "\<c-n>"
-    else
-        return "\<tab>"
-    endif
-endfunction
-
 nnoremap <leader>p :GFiles<cr>
 nnoremap <leader>P :Files<cr>
 nnoremap <leader>t :call OpenAndConfigureMyTerminal(1)<cr>
@@ -148,16 +115,51 @@ nnoremap <leader>T :call OpenAndConfigureMyTerminal(0)<cr>
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
-nnoremap <silent> gh :ALEHover<cr>
-nnoremap <silent> gd :ALEGoToDefinition<cr>
-nnoremap <silent> gr :ALEFindReferences<cr>
-
 " Open fzf's buffers list.
 nnoremap gb :Buffers<enter>
 
 " <tab>: completion.
-inoremap <silent> <expr> <tab> TabCompleteOrTab()
-inoremap <silent> <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u<cr>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" To navigate diagnostics
+nmap <silent> gg <Plug>(coc-diagnostic-next)
+nmap <silent> gG <Plug>(coc-diagnostic-prev)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " Add more granularity to undo history.
 inoremap <space> <space><c-g>u

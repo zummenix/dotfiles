@@ -15,7 +15,7 @@ function _strip {
     echo "Stripped $size_after, was $size_before"
 }
 
-CRATE_NAME=$(cat Cargo.toml | grep "name" | head -n1 | cut -d'=' -f2 | cut -d'"' -f2)
+CRATE_NAME=$(grep "name" Cargo.toml | head -n1 | cut -d'=' -f2 | cut -d'"' -f2)
 test -z "$CRATE_NAME" && _bail "Wasn't able to get a crate name."
 
 cargo install --path . && _strip $(which "$CRATE_NAME")

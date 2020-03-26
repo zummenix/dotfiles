@@ -23,6 +23,9 @@ if echo "$1" | grep -Ie ".*.png" > /dev/null; then
 elif echo "$1" | grep -Ie ".*.mov" > /dev/null; then
     DIR="$HOME/Desktop/Screenrecordings"
     FILE_NAME=$(date "+Screenrecording-%Y-%m-%d-%H-%M-%S.mov")
+elif echo "$1" | grep -Ie ".*.mp4" > /dev/null; then
+    DIR="$HOME/Desktop/Screenrecordings"
+    FILE_NAME=$(date "+Screenrecording-%Y-%m-%d-%H-%M-%S.mp4")
 else
     exit 1
 fi

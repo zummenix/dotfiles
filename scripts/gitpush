@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Tries to catch git push error when upstream is not set.
+# Copies suggested command in clipboard.
+
+git push || git push 2> FAILED_PUSH
+
+if test -e FAILED_PUSH; then
+    _command=$(grep -i "git push --set-upstream" FAILED_PUSH 2>> /dev/null)
+    test -n "${_command}" && echo "${_command}" | xargs echo -n | pbcopy &&
+        echo "    Command is in the clipboard" && echo ""
+
+    rm FAILED_PUSH
+fi
+
+

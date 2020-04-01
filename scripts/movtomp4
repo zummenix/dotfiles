@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+if ! echo "$1" | grep -Ie ".*.mov" > /dev/null; then
+    exit 1
+fi
+
+OUTPUT="${1%.*}.mp4"
+ffmpeg -i "$1" -qscale 0 "$OUTPUT" && echo "$OUTPUT"

@@ -4,6 +4,9 @@
 
 set -ex
 
+# Remove rust-analyzer for coc (it will be downloaded later by the plugin)
+trash ~/.config/coc/extensions/coc-rust-analyzer-data/rust-analyzer
+
 rustup self update
 rustup update stable
 cargo install cargo-bloat

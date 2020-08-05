@@ -6,5 +6,10 @@ set -ex
 
 rustup self update
 rustup update stable
+
 cargo install cargo-bloat
 cargo install cargo-outdated
+cargo install cargo-insta
+cargo install cargo-diet
+
+cargo install ytop

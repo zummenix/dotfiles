@@ -4,6 +4,8 @@
 
 set -ex
 
+brew upgrade
+
 rustup self update
 rustup update stable
 

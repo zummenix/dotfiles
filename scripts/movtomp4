@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+# Iterates over arguments and converts mov to mp4 using ffmpeg.
 
-if ! echo "$1" | grep -Ie ".*.mov" > /dev/null; then
-    exit 1
-fi
-
-OUTPUT="${1%.*}.mp4"
-ffmpeg -i "$1" -qscale 0 "$OUTPUT" && echo "$OUTPUT"
+for file in "$@"; do
+    if echo "$file" | grep -Ie ".*.mov" > /dev/null; then
+        OUTPUT="${file%.*}.mp4"
+        ffmpeg -i "$file" -qscale 0 "$OUTPUT" && echo "$OUTPUT"
+    fi
+done

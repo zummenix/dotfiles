@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# The script transfers provided *.png or *.mov files using SFTP.
+# The script transfers provided *.png or *.mp4 files using SFTP.
 #
-# Dependencies (all available on mac os without additonal installation):
+# Dependencies (all available on macOS without additonal installation):
 # - open - open a link in a browser
 # - scp - copy a media file securely to a server (SFTP)
 #
@@ -15,29 +15,23 @@ set -e
 SFTP_PORT=2221
 SFTP_USER=AlekseyKuznetsov
 SFTP_HOST=jing.saritasa.com
+DIR="$HOME/Desktop"
 
-# Directory and file name format configuration.
-if echo "$1" | grep -Ie ".*.png" > /dev/null; then
-    DIR="$HOME/Desktop/Screenshots"
-    FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
-elif echo "$1" | grep -Ie ".*.mov" > /dev/null; then
-    DIR="$HOME/Desktop/Screenrecordings"
-    FILE_NAME=$(date "+Screenrecording-%Y-%m-%d-%H-%M-%S.mov")
-elif echo "$1" | grep -Ie ".*.mp4" > /dev/null; then
-    DIR="$HOME/Desktop/Screenrecordings"
-    FILE_NAME=$(date "+Screenrecording-%Y-%m-%d-%H-%M-%S.mp4")
-else
-    exit 1
-fi
+for file in "$@"; do
+    # File name format configuration.
+    if echo "$file" | grep -Ie ".*.png" > /dev/null; then
+        FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
+    elif echo "$file" | grep -Ie ".*.mp4" > /dev/null; then
+        FILE_NAME=$(date "+Screenrecording-%Y-%m-%d-%H-%M-%S.mp4")
+    else
+        continue
+    fi
 
-FILE_PATH="$DIR/$FILE_NAME"
+    FILE_PATH="$DIR/$FILE_NAME"
 
-# Make sure that the output directory exist and create one if not.
-if ! test -d "$DIR"; then
-    mkdir "$DIR"
-fi
+    cp "$file" "$FILE_PATH"
+    echo "Uploading..."
+    scp -P $SFTP_PORT "$FILE_PATH" "$SFTP_USER@$SFTP_HOST:/"
+    open "https://$SFTP_HOST/$SFTP_USER/$FILE_NAME"
+done
 
-cp "$1" "$FILE_PATH"
-echo "Uploading..."
-scp -P $SFTP_PORT "$FILE_PATH" "$SFTP_USER@$SFTP_HOST:/"
-open "https://$SFTP_HOST/$SFTP_USER/$FILE_NAME"

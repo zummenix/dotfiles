@@ -15,10 +15,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'pearofducks/ansible-vim'
 Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
-Plug 'gluon-lang/vim-gluon'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'purescript-contrib/purescript-vim'
 Plug 'keith/swift.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()

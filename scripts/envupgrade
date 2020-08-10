@@ -15,3 +15,5 @@ cargo install cargo-insta
 cargo install cargo-diet
 
 cargo install ytop
+
+nvim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade

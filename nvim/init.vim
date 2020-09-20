@@ -122,6 +122,7 @@ inoremap [] []<esc>i
 inoremap {} {}<esc>i
 inoremap <> <><esc>i
 inoremap "" ""<esc>i
+inoremap '' ''<esc>i
 inoremap `` ``<esc>i
 
 " <tab>: completion.

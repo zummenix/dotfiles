@@ -116,6 +116,14 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " Open fzf's buffers list.
 nnoremap gb :Buffers<enter>
 
+" Pair parentheses and etc.
+inoremap () ()<esc>i
+inoremap [] []<esc>i
+inoremap {} {}<esc>i
+inoremap <> <><esc>i
+inoremap "" ""<esc>i
+inoremap `` ``<esc>i
+
 " <tab>: completion.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :

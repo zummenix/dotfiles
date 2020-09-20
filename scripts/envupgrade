@@ -4,10 +4,35 @@
 
 set -ex
 
+PROJECTS_DIR="$HOME/projects"
+
+function git-cargo-install {
+    if test -d "$PROJECTS_DIR"; then
+        cd "$PROJECTS_DIR"
+        if test -d "$1"; then
+            cd "$1" && git pull && cargo-install-stripped
+        fi
+    fi
+}
+
+function git-pull {
+    if test -d "$PROJECTS_DIR"; then
+        cd "$PROJECTS_DIR"
+        if test -d "$1"; then
+            cd "$1" && git pull
+        fi
+    fi
+}
+
+git-pull "dotfiles"
+
 brew upgrade
 
 rustup self update
 rustup update stable
+
+git-cargo-install "xcopen"
+git-cargo-install "mprovision"
 
 cargo install cargo-bloat
 cargo install cargo-outdated

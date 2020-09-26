@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e
+
+function clean_dir {
+    if test -d "$1"; then
+        du -hd0 "$1"
+        trash "$1"
+    else
+        echo "        $1"
+    fi
+}
+
+clean_dir "$HOME/Library/Developer/CoreSimulator"
+clean_dir "$HOME/Library/Developer/Xcode/Archives"
+clean_dir "$HOME/Library/Developer/Xcode/Products"
+clean_dir "$HOME/Library/Developer/Xcode/iOS Device Logs"
+clean_dir "$HOME/Library/Developer/Xcode/UserData/IB Support"
+clean_dir "$HOME/Library/Developer/Xcode/DerivedData"
+clean_dir "$HOME/Library/Developer/Xcode/iOS DeviceSupport"
+clean_dir "$HOME/Library/Caches/com.apple.dt.Xcode"
+
+trash -e

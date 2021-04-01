@@ -31,6 +31,9 @@ brew upgrade
 rustup self update
 rustup update stable
 
+rustup component add llvm-tools-preview
+rustup target add thumbv7em-none-eabihf
+
 git-cargo-install "xcopen"
 git-cargo-install "mprovision"
 
@@ -40,5 +43,8 @@ cargo install cargo-insta
 cargo install cargo-diet
 
 cargo install ytop
+
+cargo install itm
+cargo install cargo-binutils
 
 nvim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade

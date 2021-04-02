@@ -20,4 +20,15 @@ clean_dir "$HOME/Library/Developer/Xcode/DerivedData"
 clean_dir "$HOME/Library/Developer/Xcode/iOS DeviceSupport"
 clean_dir "$HOME/Library/Caches/com.apple.dt.Xcode"
 
+# Important for proper work of Interface Builder after deleting its directory.
+launchctl list | grep CoreSimulatorService | cut -f3 | xargs launchctl remove
+
+# Opening xcode will recreate all simulators. After that we need to remove unnecessary simulators.
+echo "Opening Xcode, waiting for it to be closed..."
+open -W -a Xcode
+
+xcrun simctl delete all
+xcrun simctl create "iPhone 12 Pro" com.apple.CoreSimulator.SimDeviceType.iPhone-12-Pro
+xcrun simctl create "iPad Air 4th gen" com.apple.CoreSimulator.SimDeviceType.iPad-Air--4th-generation-
+
 trash -e

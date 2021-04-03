@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -ex
+
+cd ~/Desktop
+trash *.png *.mp4 *.mov

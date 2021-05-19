@@ -43,6 +43,7 @@ cargo install cargo-insta
 cargo install cargo-diet
 
 cargo install ytop
+cargo install ripgrep
 
 cargo install itm
 cargo install cargo-binutils

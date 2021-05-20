@@ -19,8 +19,10 @@ DIR="$HOME/Desktop"
 
 for file in "$@"; do
     # File name format configuration.
-    if echo "$file" | grep -Ie ".*.png" > /dev/null; then
-        FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.png")
+    if echo "$file" | grep -IE ".*.(png|jpg)" > /dev/null; then
+        EXT=$(basename "$file")
+        EXT="${EXT##*.}"
+        FILE_NAME=$(date "+Screenshot-%Y-%m-%d-%H-%M-%S.$EXT")
     elif echo "$file" | grep -Ie ".*.mp4" > /dev/null; then
         FILE_NAME=$(date "+Screenrecording-%Y-%m-%d-%H-%M-%S.mp4")
     else

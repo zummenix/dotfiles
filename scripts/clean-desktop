@@ -3,4 +3,4 @@
 set -ex
 
 cd ~/Desktop
-trash *.png *.mp4 *.mov
+trash *.png *.jpg *.mp4 *.mov

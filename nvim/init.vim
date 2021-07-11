@@ -17,7 +17,6 @@ Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'keith/swift.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 

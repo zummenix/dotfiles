@@ -1,7 +1,7 @@
 function fish_right_prompt
-    set -l git_branch (git rev-parse --abbrev-ref HEAD ^/dev/null)
+    set -l git_branch (git rev-parse --abbrev-ref HEAD 2> /dev/null)
     if test -n "$git_branch"
-        set -l git_status (git status --porcelain ^/dev/null)
+        set -l git_status (git status --porcelain 2> /dev/null)
         set -l git_line_color 778
         set_color $git_line_color
         echo -n 'git['

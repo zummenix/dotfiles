@@ -1,3 +1,4 @@
-function v --description 'Shortcut for neovim with background jobs support'
-    jobs | grep -ie "nvim" | head -n1 | cut -f 2 - | fg || nvim $argv
+function v --description 'v is deprecated, use e'
+    echo "v command was renamed to e" 1>&2
+    return 1
 end

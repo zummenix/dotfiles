@@ -24,18 +24,21 @@ let g:elm_setup_keybindings=0
 
 let g:fzf_layout = { 'down': '~20%' }
 
-set hidden
-set number
-set relativenumber
-set incsearch
-set ignorecase
-set smartcase
-set nohlsearch
-set signcolumn=yes
-set completeopt=menu,menuone,preview,noinsert
-set cursorline
-set backspace=indent,start,eol
-set scrolloff=3
+lua << EOM
+vim.opt.hidden = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = false
+vim.opt.signcolumn = 'yes'
+vim.opt.completeopt = 'menu,menuone,preview,noinsert'
+vim.opt.cursorline = true
+vim.opt.backspace = 'indent,start,eol'
+vim.opt.scrolloff = 3
+EOM
+
 set shortmess+=c
 
 " Configure status line.

@@ -37,6 +37,25 @@ vim.opt.completeopt = 'menu,menuone,preview,noinsert'
 vim.opt.cursorline = true
 vim.opt.backspace = 'indent,start,eol'
 vim.opt.scrolloff = 3
+vim.opt.colorcolumn = '100'
+
+-- Configure tab indentation.
+vim.opt.autoindent = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 0 -- Use tabstop value.
+
+-- Sane splits.
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Folding using indentation and in unfold state by default.
+vim.opt.foldmethod = 'indent'
+vim.opt.foldlevel = 20
+
+-- Show trailing spaces.
+vim.opt.listchars = 'tab:►-,trail:·'
+vim.opt.list = true
 EOM
 
 set shortmess+=c
@@ -74,27 +93,7 @@ set statusline+=\ %q
 set statusline+=\ %{StatusDiagnostic()}
 set statusline+=%=%l\:%-4.c\ %L
 
-" Configure tab indentation.
-set autoindent
-set expandtab
-set tabstop=4
-set shiftwidth=0 " Use tabstop value.
-
-" Folding using indentation and in unfold state by default.
-set foldmethod=indent
-set foldlevel=20
-
-set colorcolumn=100
-
-" Show trailing spaces.
-set listchars=tab:►-,trail:·
-set list
-
 filetype plugin indent on
-
-" Sane splits.
-set splitright
-set splitbelow
 
 let mapleader="\<SPACE>"
 

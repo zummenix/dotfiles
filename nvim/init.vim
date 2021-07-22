@@ -1,3 +1,4 @@
+
 language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -20,9 +21,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-let g:elm_setup_keybindings=0
-
-let g:fzf_layout = { 'down': '~20%' }
 
 lua << EOM
 vim.opt.hidden = true
@@ -56,6 +54,10 @@ vim.opt.foldlevel = 20
 -- Show trailing spaces.
 vim.opt.listchars = 'tab:►-,trail:·'
 vim.opt.list = true
+
+-- Plugins
+vim.g.elm_setup_keybindings = 0
+vim.g.fzf_layout = { down = "~20%" }
 EOM
 
 set shortmess+=c

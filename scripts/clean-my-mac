@@ -19,6 +19,11 @@ clean_dir "$HOME/Library/Developer/Xcode/UserData/IB Support"
 clean_dir "$HOME/Library/Developer/Xcode/DerivedData"
 clean_dir "$HOME/Library/Developer/Xcode/iOS DeviceSupport"
 clean_dir "$HOME/Library/Caches/com.apple.dt.Xcode"
+clean_dir "$HOME/Library/Caches/Google"
+clean_dir "$HOME/Library/Caches/Homebrew"
+clean_dir "$HOME/Library/Caches/CocoaPods"
+clean_dir "$HOME/Library/Caches/org.carthage.CarthageKit"
+clean_dir "$HOME/.cargo/registry"
 
 # Important for proper work of Interface Builder after deleting its directory.
 launchctl list | grep CoreSimulatorService | cut -f3 | xargs launchctl remove

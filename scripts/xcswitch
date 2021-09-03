@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Simplifies process of switching between Xcode versions.
+
+echo "Closing all Simulator instances"
+osascript -e 'tell app "Simulator" to quit'
+
+echo "Closing all Xcode instances"
+osascript -e 'tell app "Xcode" to quit'
+
+ls -d /Applications/Xcode*/ |
+    fzf --prompt "Which one? " |
+    xargs -I{} sudo xcode-select --switch "{}Contents/Developer" &&
+    xcode-select --print-path

@@ -10,7 +10,7 @@ function git-cargo-install {
     if test -d "$PROJECTS_DIR"; then
         cd "$PROJECTS_DIR"
         if test -d "$1"; then
-            cd "$1" && git pull && cargo-install-stripped
+            cd "$1" && git pull && cargo-install-stripped && cargo clean
         fi
     fi
 }

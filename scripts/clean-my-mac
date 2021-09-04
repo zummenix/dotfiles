@@ -24,6 +24,7 @@ clean_dir "$HOME/Library/Caches/Homebrew"
 clean_dir "$HOME/Library/Caches/CocoaPods"
 clean_dir "$HOME/Library/Caches/org.carthage.CarthageKit"
 clean_dir "$HOME/.cargo/registry"
+clean_dir "$HOME/.cargo/git"
 
 # Important for proper work of Interface Builder after deleting its directory.
 launchctl list | grep CoreSimulatorService | cut -f3 | xargs launchctl remove

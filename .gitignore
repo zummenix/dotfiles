@@ -1,5 +1,6 @@
 *.retry
 fish/fishd.*
 fish/fish_variables
+Brewfile.lock.json
 *.pyc
 __pycache__/

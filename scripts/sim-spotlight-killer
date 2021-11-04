@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# In Xcode 13, after launching an iOS Simulator, there appears to be a Spotlight
+# process which uses considerable amount of CPU resources.
+# We try to find this process and kill it.
+
+echo "Press [CTRL+C] to stop..."
+while true
+do
+    SPOTLIGHT_PID=$(ps -ax |
+        grep "iOS.simruntime/Contents/Resources/RuntimeRoot/Applications/Spotlight.app/Spotlight" |
+        grep -wv grep | head -n1 | cut -f1 -d" ")
+    if test -n "$SPOTLIGHT_PID"; then
+        echo "Found iOS Simulator Spotlight process with PID $SPOTLIGHT_PID, killing it!"
+        kill -KILL "$SPOTLIGHT_PID"
+    fi
+    sleep 30
+done

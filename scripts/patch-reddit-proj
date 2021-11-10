@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+# Temporary solution to set IS_EXECUTING_TEST env variable for the RedditCore module.
+# Requires xcodeproj gem: `gem install xcodeproj`
+
+require 'xcodeproj'
+
+scheme = Xcodeproj::XCScheme.new("Reddit.xcodeproj/xcshareddata/xcschemes/RedditCore.xcscheme")
+test_action = scheme.test_action
+test_action.should_use_launch_scheme_args_env = false
+test_action.environment_variables = Xcodeproj::XCScheme::EnvironmentVariables.new([{
+  :key => "IS_EXECUTING_TEST", :value => "1"
+}])
+scheme.save!

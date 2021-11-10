@@ -5,6 +5,8 @@
 
 require 'xcodeproj'
 
+puts "Setting IS_EXECUTING_TEST for RedditCore"
+
 scheme = Xcodeproj::XCScheme.new("Reddit.xcodeproj/xcshareddata/xcschemes/RedditCore.xcscheme")
 test_action = scheme.test_action
 test_action.should_use_launch_scheme_args_env = false

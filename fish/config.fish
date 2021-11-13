@@ -24,3 +24,5 @@ set fish_color_quote white
 set fish_pager_color_description normal
 
 set fish_greeting ""
+
+status --is-interactive; and rbenv init - fish | source

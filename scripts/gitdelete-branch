@@ -3,9 +3,11 @@
 BRANCH_NAME=$(git branch | fzf | rg -v "^\*" | xargs)
 if test -n "$BRANCH_NAME"; then
     git branch -d "$BRANCH_NAME"
-    read -p "Do you want to remove a remote branch? [y/n] " CONFIRMATION
-    if test "$CONFIRMATION" = "y"; then
-        git push -d origin "$BRANCH_NAME"
+    if pwd | rg -v "reddit" 1>> /dev/null; then
+        read -p "Do you want to remove a remote branch? [y/n] " CONFIRMATION
+        if test "$CONFIRMATION" = "y"; then
+            git push -d origin "$BRANCH_NAME"
+        fi
     fi
 fi
 

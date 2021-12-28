@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Prepares a work report based on a git history for the month.
+
+set -e
+
+DATE=$1
+if test -z "$DATE"; then
+    DATE=$(date "+%Y-%m-01")
+fi
+
+git log --author="Aleksey Kuznetsov" --since="$DATE" --oneline | cut -c 12-999

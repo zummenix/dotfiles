@@ -23,6 +23,18 @@ function pull {
     fi
 }
 
+# Installs a tool from a git repository.
+function git-cargo-install {
+    desc "Installing $2"
+    pull "$1" "$2" && cd "$2" && cargo-install-stripped && cargo clean
+}
+
+# Installs a tool.
+function cargo-install {
+    desc "Installing $1"
+    cargo install "$1"
+}
+
 # Creates a symbolic link to a file or a directory.
 function symlink {
     ln -hfs "$1" "$2"
@@ -41,6 +53,18 @@ if test -x "$(command -v brew)"; then
 else
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+desc "Ensure rustup is installed"
+if ! test -x "$(command -v rustup)"; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+
+desc "Ensure rust is installed and up to date"
+rustup self update
+rustup update stable
+
+rustup component add llvm-tools-preview
+rustup target add thumbv7em-none-eabihf
 
 desc "Ensure ~/.config directory exists"
 dir "$CONFIG_DIR"
@@ -65,6 +89,24 @@ symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 
 desc "Symlink tig settings"
 symlink "$PROJECTS_DIR/dotfiles/tig/.tigrc" "$HOME/.tigrc"
+
+git-cargo-install "https://github.com/zummenix/xcopen" "$PROJECTS_DIR/xcopen"
+git-cargo-install "https://github.com/zummenix/mprovision" "$PROJECTS_DIR/mprovision"
+
+cargo-install cargo-bloat
+cargo-install cargo-outdated
+cargo-install cargo-insta
+cargo-install cargo-diet
+
+cargo-install ytop
+cargo-install ripgrep
+cargo-install tokei
+
+cargo-install itm
+cargo-install cargo-binutils
+
+desc "Ensure neovim plugins are up to date"
+nvim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade
 
 desc "Switch current shell to fish"
 if test $(echo "$SHELL" | grep fish); then

@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+# Echos out a description of a task.
+function desc {
+    echo "§ $1"
+}
+
+# Ensures a direcotry exists.
+function dir {
+    if test -d "$1"; then
+        echo "$1 exists."
+    else
+        mkdir "$1" && echo "$1 has been created."
+    fi
+}
+
+# Ensures a git repo is up to date.
+function git-repo {
+    if test -d "$2"; then
+        cd "$2" && git pull
+    else
+        git clone "$1" "$2"
+    fi
+}
+
+# Creates a symbolic link to a file or a directory.
+function symlink {
+    ln -hfs "$1" "$2"
+    ls -l "$2"
+}
+
+
+CONFIG_DIR="$HOME/.config"
+PROJECTS_DIR="$HOME/projects"
+
+desc "Ensure xcode command line tools are installed"
+xcode-select --install
+
+desc "Ensure homebrew is up to date"
+if test -x "$(command -v brew)"; then
+    brew update
+else
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+desc "Ensure ~/.config directory exists"
+dir "$CONFIG_DIR"
+
+desc "Ensure ~/projects directory exists"
+dir "$PROJECTS_DIR"
+
+desc "Pull dotfiles repository"
+git-repo "https://github.com/zummenix/dotfiles" "$PROJECTS_DIR/dotfiles"
+
+desc "Pull base16 colorscheme repository"
+git-repo "https://github.com/chriskempson/base16-shell.git" "$CONFIG_DIR/base16-shell"
+
+
+desc "Install/cleanup dependencies using Brewfile"
+brew bundle --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v
+
+desc "Symlink neovim settings"
+symlink "$PROJECTS_DIR/dotfiles/nvim" "$CONFIG_DIR/nvim"
+
+desc "Symlink fish settings"
+symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
+
+desc "Symlink tig settings"
+symlink "$PROJECTS_DIR/dotfiles/tig/.tigrc" "$HOME/.tigrc"
+
+LINE="$(which fish)"
+FILE=/etc/shells
+grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
+chsh -s $LINE
+
+duti ~/.duti

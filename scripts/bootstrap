@@ -72,5 +72,3 @@ LINE="$(which fish)"
 FILE=/etc/shells
 grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
 chsh -s $LINE
-
-duti ~/.duti

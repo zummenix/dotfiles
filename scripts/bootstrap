@@ -66,7 +66,12 @@ symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 desc "Symlink tig settings"
 symlink "$PROJECTS_DIR/dotfiles/tig/.tigrc" "$HOME/.tigrc"
 
-LINE="$(which fish)"
-FILE=/etc/shells
-grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
-chsh -s $LINE
+desc "Switch current shell to fish"
+if test $(echo "$SHELL" | grep fish); then
+    echo "Already fish."
+else
+    LINE="$(which fish)"
+    FILE=/etc/shells
+    grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
+    chsh -s $LINE
+fi

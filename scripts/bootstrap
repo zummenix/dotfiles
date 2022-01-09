@@ -73,5 +73,5 @@ else
     LINE="$(which fish)"
     FILE=/etc/shells
     grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
-    chsh -s $LINE
+    chsh -s $LINE && echo "Done. Please open a new terminal tab or window to see the change."
 fi

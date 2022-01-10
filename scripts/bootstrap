@@ -90,8 +90,8 @@ symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 desc "Symlink tig settings"
 symlink "$PROJECTS_DIR/dotfiles/tig/.tigrc" "$HOME/.tigrc"
 
-git-cargo-install "https://github.com/zummenix/xcopen" "$PROJECTS_DIR/xcopen"
-git-cargo-install "https://github.com/zummenix/mprovision" "$PROJECTS_DIR/mprovision"
+git-cargo-install "git@github.com:zummenix/xcopen.git" "$PROJECTS_DIR/xcopen"
+git-cargo-install "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"
 
 cargo-install cargo-bloat
 cargo-install cargo-outdated

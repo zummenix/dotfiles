@@ -2,7 +2,10 @@
 
 # Echos out a description of a task.
 function desc {
+    tput bold && tput setaf 2
+    echo ""
     echo "§ $1"
+    tput sgr0
 }
 
 # Ensures a direcotry exists.

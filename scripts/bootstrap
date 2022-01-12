@@ -58,7 +58,9 @@ else
 fi
 
 desc "Ensure rustup is installed"
-if ! test -x "$(command -v rustup)"; then
+if test -x "$(command -v rustup)"; then
+    echo "rustup is installed."
+else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
@@ -110,6 +112,7 @@ cargo-install itm
 cargo-install cargo-binutils
 
 desc "Ensure neovim plugins are up to date"
+echo "Launching neovim."
 nvim +PlugInstall +PlugClean +PlugUpdate +PlugUpgrade
 
 desc "Switch current shell to fish"

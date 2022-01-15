@@ -29,7 +29,8 @@ function pull {
 # Installs a tool from a git repository.
 function git-cargo-install {
     desc "Installing $2"
-    pull "$1" "$2" && cd "$2" && cargo-install-stripped && cargo clean
+    pull "$1" "$2" && cd "$2" && \
+        sh "$HOME"/projects/dotfiles/scripts/cargo-install-stripped && cargo clean
 }
 
 # Installs a tool.

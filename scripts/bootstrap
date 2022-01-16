@@ -125,3 +125,6 @@ else
     grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
     chsh -s $LINE && echo "Done. Please open a new terminal tab or window to see the change."
 fi
+
+desc "Set my favorite colorscheme"
+fish $HOME/projects/dotfiles/scripts/set-fav-colorscheme

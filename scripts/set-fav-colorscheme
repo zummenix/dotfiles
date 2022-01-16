@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+source "$HOME/.config/base16-shell/profile_helper.fish"
+base16-ocean && echo "Done."

@@ -34,6 +34,7 @@ echo "Opening Xcode, waiting for it to be closed..."
 open -W -a Xcode
 
 xcrun simctl delete all
+xcrun simctl create "iPhone 8 Plus" com.apple.CoreSimulator.SimDeviceType.iPhone-8-Plus
 xcrun simctl create "iPhone 13 Pro" com.apple.CoreSimulator.SimDeviceType.iPhone-13-Pro
 xcrun simctl create "iPad Air 4th gen" com.apple.CoreSimulator.SimDeviceType.iPad-Air--4th-generation-
 

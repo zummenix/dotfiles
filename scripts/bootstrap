@@ -96,6 +96,12 @@ symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 desc "Symlink tig settings"
 symlink "$PROJECTS_DIR/dotfiles/tig/.tigrc" "$HOME/.tigrc"
 
+desc "Symlink git config"
+symlink "$PROJECTS_DIR/dotfiles/git/.gitconfig" "$HOME/.gitconfig"
+
+desc "Symlink global git ignore"
+symlink "$PROJECTS_DIR/dotfiles/git/.gitignore-global" "$HOME/.gitignore-global"
+
 git-cargo-install "git@github.com:zummenix/xcopen.git" "$PROJECTS_DIR/xcopen"
 git-cargo-install "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"
 

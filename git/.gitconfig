@@ -1,0 +1,22 @@
+[user]
+    email = zummenix@gmail.com
+    name = Aleksey Kuznetsov
+[pull]
+    rebase = false
+[core]
+    excludesFile = ~/.gitignore-global
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[merge]
+    tool = nvimdiff
+[mergetool]
+    prompt = true
+[mergetool "nvimdiff"]
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+    prompt = false
+[diff]
+    tool = nvimdiff

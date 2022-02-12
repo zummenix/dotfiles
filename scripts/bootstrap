@@ -111,7 +111,7 @@ cargo-install cargo-insta
 cargo-install cargo-diet
 cargo-install cargo-audit
 
-cargo-install ytop
+cargo-install bottom
 cargo-install ripgrep
 cargo-install tokei
 

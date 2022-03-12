@@ -1,6 +1,7 @@
 set -Ux EDITOR nvim
 set PATH "$HOME/.cargo/bin" $PATH
 set PATH "$HOME/projects/dotfiles/scripts" $PATH
+set -Ux fish_user_paths /opt/homebrew/bin/ $fish_user_paths
 set -Ux LC_ALL "en_US.UTF-8"
 
 if status --is-interactive

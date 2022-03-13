@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+COMMAND="$1"
+INSTANCE_ID="$2"
+
+if test -z "$COMMAND" -o -z "$INSTANCE_ID"; then
+    echo "Usage: aws-ec2 <start|stop|dns-name> <instance id>"
+    exit 1
+fi
+
+function wait_state() {
+    while true; do
+        sleep 2
+        STATE=$(aws --profile my ec2 describe-instances --instance-ids "$INSTANCE_ID" --query 'Reservations[].Instances[].State.Name' --output text)
+        echo "$STATE"
+        if test "$STATE" = "$1"; then
+            break
+        fi
+    done
+}
+
+if test "$COMMAND" = "start"; then
+    aws --profile my ec2 start-instances --instance-ids "$INSTANCE_ID" --output text
+    wait_state "running"
+fi
+
+if test "$COMMAND" = "stop"; then
+    aws --profile my ec2 stop-instances --instance-ids "$INSTANCE_ID" --output text
+    wait_state "stopped"
+fi
+
+if test "$COMMAND" = "dns-name"; then
+    aws --profile my ec2 describe-instances --instance-ids "$INSTANCE_ID" --query 'Reservations[].Instances[].PublicDnsName' --output text
+fi

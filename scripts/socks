@@ -36,4 +36,4 @@ trap disable_proxy INT
 enable_proxy
 
 echo "Tunneling..."
-ssh -i "$IDENTITY_FILE" -D "$PORT" -CN "$DESTINATION"
+ssh -i "$IDENTITY_FILE" -D "$PORT" -gCN "$DESTINATION"

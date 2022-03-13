@@ -3,18 +3,25 @@
 # Enables localhost socks proxy for the network and starts ssh tunneling.
 
 IDENTITY_FILE="$1"
-DESTINATION="$2"
+USER="$2"
+INSTANCE_ID="$3"
 PORT="1313"
 
-if test -z "$IDENTITY_FILE" -o -z "$DESTINATION"; then
-    echo "Usage: socks .ssh/my-key.pem user@host"
+if test -z "$IDENTITY_FILE" -o -z "$USER" -o -z "$INSTANCE_ID"; then
+    echo "Usage: socks <identity-file> <user> <instance-id>"
     exit 1
 fi
+
+PUBLIC_DNS_NAME=$(aws --profile my ec2 describe-instances --instance-ids "$INSTANCE_ID" --query 'Reservations[].Instances[].PublicDnsName' --output text)
+if test -z "$PUBLIC_DNS_NAME"; then
+    echo "The instance is probably not running!"
+    exit 1
+fi
+DESTINATION="$USER@$PUBLIC_DNS_NAME"
 
 enable_proxy() {
     networksetup -setsocksfirewallproxy Wi-Fi localhost "$PORT"
     networksetup -setsocksfirewallproxystate Wi-Fi on
-    networksetup -setproxybypassdomains Wi-Fi youtube.com
     echo "SOCKS proxy enabled."
 }
 

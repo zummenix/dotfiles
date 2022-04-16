@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Enables localhost socks proxy for the network and starts ssh tunneling.
+
+IDENTITY_FILE="$1"
+USER="$2"
+DESTINATION="$3"
+PORT="1313"
+
+if test -z "$IDENTITY_FILE" -o -z "$USER" -o -z "$DESTINATION"; then
+    echo "Usage: socks <identity-file> <user> <destination>"
+    exit 1
+fi
+
+enable_proxy() {
+    networksetup -setsocksfirewallproxy Wi-Fi localhost "$PORT"
+    networksetup -setsocksfirewallproxystate Wi-Fi on
+    echo "SOCKS proxy enabled."
+}
+
+disable_proxy() {
+    echo "" # Just for beauty when ^C :)
+    networksetup -setsocksfirewallproxystate Wi-Fi off
+    echo "SOCKS proxy disabled."
+}
+
+trap disable_proxy INT
+
+enable_proxy
+
+echo "Tunneling..."
+ssh -i "$IDENTITY_FILE" -D "$PORT" -gCN "$USER@$DESTINATION"
+

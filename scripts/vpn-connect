@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+_print_usage() {
+    echo "Usage:"
+    echo "  vpn-connect start <host>"
+    echo "  vpn-connect stop"
+}
+
+_stop() {
+    echo ""
+    echo ""
+    /opt/cisco/anyconnect/bin/vpn disconnect
+
+    sudo /opt/cisco/anyconnect/bin/acinstallhelper -pfConfUpdate -revert
+    sudo pfctl -Ef /etc/pf.conf
+    exit 0
+}
+
+COMMAND="$1"
+
+if test "$COMMAND" = "start"; then
+    VPNHOST="$2"
+    if test -z "$VPNHOST"; then
+        _print_usage
+        exit 1
+    fi
+
+    trap _stop INT
+
+    sudo -v
+
+    sudo /opt/cisco/anyconnect/bin/acinstallhelper -pfConfUpdate -apply
+
+    /opt/cisco/anyconnect/bin/vpn connect "$VPNHOST"
+    while true
+    do
+        if /opt/cisco/anyconnect/bin/vpn state | grep ">> state: Disconnected" 1>> /dev/null; then
+            _stop
+        fi
+        sleep 60
+
+        sudo -v
+
+        DURATION=$(/opt/cisco/anyconnect/bin/vpn stats | grep "Duration:")
+        echo -ne "\r                                                                             "
+        echo -ne "\r$DURATION"
+    done
+elif test "$COMMAND" = "stop"; then
+    _stop
+else
+    _print_usage
+    exit 1
+fi

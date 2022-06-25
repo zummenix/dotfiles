@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Command line helper to run AnyConnect VPN client from the terminal.
+
+BIN_DIR=/opt/cisco/anyconnect/bin
+
 _print_usage() {
     echo "Usage:"
     echo "  vpn-connect start <host>"
@@ -7,12 +11,21 @@ _print_usage() {
 }
 
 _stop() {
-    echo ""
-    echo ""
-    /opt/cisco/anyconnect/bin/vpn disconnect
+    echo "" # Just for beauty when ^C :)
+    $BIN_DIR/vpn disconnect
 
-    sudo /opt/cisco/anyconnect/bin/acinstallhelper -pfConfUpdate -revert
-    sudo pfctl -Ef /etc/pf.conf
+    # AnyConnect changes packet filter config. Here we reset it back.
+    # Reverts /etc/pf.conf config by removing AnyConnect's rules.
+    sudo $BIN_DIR/acinstallhelper -pfConfUpdate -revert
+
+    # The following commands ensure that there are no problems with Safari and Mail apps
+    # after reverting packet filter rules. Without these I've noticed youtube channel pics
+    # don't load and pictures don't load in Mail app.
+    sudo pfctl -F all
+    sudo pfctl -F all
+
+    sudo -k # Reset auth
+
     exit 0
 }
 
@@ -27,23 +40,23 @@ if test "$COMMAND" = "start"; then
 
     trap _stop INT
 
-    sudo -v
+    # Apply AnyConnect's packet filter rules.
+    sudo -vp "Please type a password for %u to start the vpn: "
+    sudo $BIN_DIR/acinstallhelper -pfConfUpdate -apply
 
-    sudo /opt/cisco/anyconnect/bin/acinstallhelper -pfConfUpdate -apply
+    $BIN_DIR/vpn connect "$VPNHOST"
 
-    /opt/cisco/anyconnect/bin/vpn connect "$VPNHOST"
+    echo "Press [Ctrl+C] to stop the VPN..."
+
     while true
     do
-        if /opt/cisco/anyconnect/bin/vpn state | grep ">> state: Disconnected" 1>> /dev/null; then
+        if $BIN_DIR/vpn state | grep ">> state: Disconnected" 1>> /dev/null; then
             _stop
         fi
+
         sleep 60
 
-        sudo -v
-
-        DURATION=$(/opt/cisco/anyconnect/bin/vpn stats | grep "Duration:")
-        echo -ne "\r                                                                             "
-        echo -ne "\r$DURATION"
+        sudo -v # Extend auth, since we need it in the stop.
     done
 elif test "$COMMAND" = "stop"; then
     _stop

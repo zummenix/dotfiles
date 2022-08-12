@@ -12,6 +12,8 @@ _print_usage() {
 
 _stop() {
     echo "" # Just for beauty when ^C :)
+
+    sudo -vp "Please type a password for %u to stop the vpn: "
     $BIN_DIR/vpn disconnect
 
     # AnyConnect changes packet filter config. Here we reset it back.
@@ -54,12 +56,10 @@ if test "$COMMAND" = "start"; then
     while true
     do
         if $BIN_DIR/vpn state | grep ">> state: Disconnected" 1>> /dev/null; then
-            _stop
+            echo "$(date +"%H:%M:%S") Disconnected"
         fi
 
         sleep 60
-
-        sudo -v # Extend auth, since we need it in the stop.
     done
 elif test "$COMMAND" = "stop"; then
     _stop

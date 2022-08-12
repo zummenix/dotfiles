@@ -3,6 +3,7 @@ language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
+Plug 'f-person/git-blame.nvim'
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
 Plug 'wincent/terminus'
@@ -58,6 +59,7 @@ vim.opt.list = true
 -- Plugins
 vim.g.elm_setup_keybindings = 0
 vim.g.fzf_layout = { down = "~20%" }
+vim.g.gitblame_enabled = 0
 EOM
 
 set shortmess+=c

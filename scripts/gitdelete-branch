@@ -1,13 +1,28 @@
 #!/usr/bin/env bash
 
 BRANCH_NAME=$(git branch | fzf | rg -v "^\*" | xargs)
-if test -n "$BRANCH_NAME"; then
+
+function _delete_branch {
     git branch -d "$BRANCH_NAME"
+}
+
+function _delete_branch_force {
+    git branch -D "$BRANCH_NAME"
+}
+
+function _ask_delete_remote_branch {
+    read -p "Do you want to remove a remote branch? [y/n] " CONFIRMATION
+    if test "$CONFIRMATION" = "y"; then
+        git push -d origin "$BRANCH_NAME"
+    fi
+}
+
+if test -n "$BRANCH_NAME"; then
     if pwd | rg -v "wallet" 1>> /dev/null; then
-        read -p "Do you want to remove a remote branch? [y/n] " CONFIRMATION
-        if test "$CONFIRMATION" = "y"; then
-            git push -d origin "$BRANCH_NAME"
-        fi
+        _delete_branch
+        _ask_delete_remote_branch
+    else
+        _delete_branch_force
     fi
 fi
 

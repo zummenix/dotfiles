@@ -1,4 +1,4 @@
-set -Ux EDITOR nvim
+set -Ux EDITOR hx
 set PATH "$HOME/.cargo/bin" $PATH
 set PATH "$HOME/projects/dotfiles/scripts" $PATH
 set -Ux fish_user_paths /opt/homebrew/bin/ $fish_user_paths

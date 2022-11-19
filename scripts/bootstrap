@@ -90,6 +90,9 @@ brew bundle --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v
 desc "Symlink neovim settings"
 symlink "$PROJECTS_DIR/dotfiles/nvim" "$CONFIG_DIR/nvim"
 
+desc "Symlink helix settings"
+symlink "$PROJECTS_DIR/dotfiles/helix" "$CONFIG_DIR/helix"
+
 desc "Symlink fish settings"
 symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 
@@ -129,6 +132,11 @@ else
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+desc "Fetch tree-sitter grammars for Helix"
+hx --grammar fetch
+
+desc "Build tree-sitter grammars"
+hx --grammar build
 
 desc "Ensure neovim plugins are up to date"
 echo "Launching neovim."

@@ -1,0 +1,11 @@
+theme = "everforest_dark"
+
+[editor]
+line-number = "relative"
+cursorline = true
+rulers = [100]
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"

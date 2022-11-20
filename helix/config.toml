@@ -7,7 +7,7 @@ rulers = [100]
 color-modes = true
 
 [editor.cursor-shape]
-insert = "bar"
+insert = "underline"
 normal = "block"
 
 [editor.lsp]

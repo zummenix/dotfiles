@@ -26,6 +26,11 @@ function pull {
     fi
 }
 
+function npm-install {
+    desc "NPM install $1"
+    npm install --global "$1"
+}
+
 # Installs a tool from a git repository.
 function git-cargo-install {
     desc "Installing $2"
@@ -104,6 +109,8 @@ symlink "$PROJECTS_DIR/dotfiles/git/.gitconfig" "$HOME/.gitconfig"
 
 desc "Symlink global git ignore"
 symlink "$PROJECTS_DIR/dotfiles/git/.gitignore-global" "$HOME/.gitignore-global"
+
+npm-install "vscode-langservers-extracted"
 
 git-cargo-install "git@github.com:zummenix/xcopen.git" "$PROJECTS_DIR/xcopen"
 git-cargo-install "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"

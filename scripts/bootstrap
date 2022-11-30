@@ -122,6 +122,14 @@ cargo-install tokei
 cargo-install itm
 cargo-install cargo-binutils
 
+if test -n "$HELIX_RUNTIME"; then
+    desc "Fetch tree-sitter grammars for Helix"
+    hx --grammar fetch
+
+    desc "Build tree-sitter grammars"
+    hx --grammar build
+fi
+
 desc "Ensure vim-plug is installed"
 PLUG_VIM="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim
 if test -f "$PLUG_VIM"; then
@@ -132,11 +140,6 @@ else
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-desc "Fetch tree-sitter grammars for Helix"
-hx --grammar fetch
-
-desc "Build tree-sitter grammars"
-hx --grammar build
 
 desc "Ensure neovim plugins are up to date"
 echo "Launching neovim."

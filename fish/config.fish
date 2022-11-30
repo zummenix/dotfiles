@@ -1,4 +1,5 @@
 set -Ux EDITOR hx
+set -Ux HELIX_RUNTIME "$HOME/projects/helix/runtime"
 set PATH "$HOME/.cargo/bin" $PATH
 set PATH "$HOME/projects/dotfiles/scripts" $PATH
 set -Ux fish_user_paths /opt/homebrew/bin/ $fish_user_paths

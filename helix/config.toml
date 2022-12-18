@@ -10,5 +10,11 @@ color-modes = true
 insert = "underline"
 normal = "block"
 
+[editor.statusline]
+left = ["mode", "spinner", "file-name"]
+center = ["spacer"]
+right = ["diagnostics", "selections", "position", "total-line-numbers", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+
 [editor.lsp]
 display-messages = true

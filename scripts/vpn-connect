@@ -23,10 +23,7 @@ _stop() {
     # The following commands ensure that there are no problems with Safari and Mail apps
     # after reverting packet filter rules. Without these I've noticed youtube channel pics
     # don't load and pictures don't load in Mail app.
-    sudo pfctl -F all
-
-    echo "Waiting to clean packet filter..."
-    sleep 30
+    sleep 1
     sudo pfctl -F all
 
     sudo -k # Reset auth

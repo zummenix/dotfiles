@@ -50,6 +50,7 @@
 "ui.statusline" = { fg = "base04", bg = "base01" }
 "ui.text" = "base05"
 "ui.text.focus" = "base05"
+"ui.text.inactive" = "base06"
 "ui.virtual.ruler" = { bg = "base01" }
 "ui.virtual.whitespace" = { fg = "base03" }
 "ui.window" = { bg = "base01" }

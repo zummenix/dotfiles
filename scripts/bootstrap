@@ -35,7 +35,7 @@ function npm-install {
 function git-cargo-install {
     desc "Installing $2"
     pull "$1" "$2" && cd "$2" && \
-        sh "$HOME"/projects/dotfiles/scripts/cargo-install-stripped && cargo clean
+        sh "$HOME"/projects/dotfiles/scripts/cargo-install-stripped
 }
 
 # Installs a tool.

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Echos out a description of a task.
+function desc {
+    tput bold && tput setaf 2
+    echo ""
+    echo "§ $1"
+    tput sgr0
+}
+
+my_patch_branches=(
+  indication-of-current-search-match
+  linewise-paste-config-option
+  severity-marker-in-diagnostics-picker
+)
+
+for patch_branch in "${my_patch_branches[@]}"; do
+  desc "Updating $patch_branch"
+  git checkout "$patch_branch" && git rebase master || git checkout master
+done
+
+desc "Preparing sandbox"
+git branch -D sandbox || true
+git checkout -b sandbox
+
+for patch_branch in "${my_patch_branches[@]}"; do
+  desc "Applying $patch_branch"
+  git rebase "$patch_branch" || git checkout sandbox
+done
+
+desc "Compiling helix"
+cargo install --path helix-term --locked
+
+git checkout master

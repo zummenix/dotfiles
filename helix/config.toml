@@ -11,9 +11,9 @@ insert = "underline"
 normal = "block"
 
 [editor.statusline]
-left = ["mode", "spinner", "file-name"]
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
 center = ["spacer"]
-right = ["diagnostics", "selections", "position", "total-line-numbers", "file-encoding", "file-line-ending", "file-type"]
+right = ["workspace-diagnostics", "selections", "position", "total-line-numbers", "file-encoding", "file-line-ending", "file-type"]
 separator = "│"
 
 [editor.lsp]

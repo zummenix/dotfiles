@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# A script that helps me manage my own patches to helix editor.
+# It will rebase each patch to the master to check compatibility,
+# then create a `sandbox` branch and try to rebase each patch.
+# And finally, it will run `cargo install`.
+#
+# Should be run inside helix git repository.
+
 # Echos out a description of a task.
 function desc {
     tput bold && tput setaf 2
@@ -16,7 +23,16 @@ my_patch_branches=(
 
 for patch_branch in "${my_patch_branches[@]}"; do
   desc "Updating $patch_branch"
-  git checkout "$patch_branch" && git rebase master || git checkout master
+  git checkout "$patch_branch"
+  if test $? -ne 0; then
+    exit 1
+  fi
+
+  git rebase master
+  if test $? -ne 0; then
+    git rebase --abort
+    exit 1
+  fi
 done
 
 desc "Preparing sandbox"
@@ -25,7 +41,11 @@ git checkout -b sandbox
 
 for patch_branch in "${my_patch_branches[@]}"; do
   desc "Applying $patch_branch"
-  git rebase "$patch_branch" || git checkout sandbox
+  git rebase "$patch_branch"
+  if test $? -ne 0; then
+    git rebase --abort
+    exit 1
+  fi
 done
 
 desc "Compiling helix"

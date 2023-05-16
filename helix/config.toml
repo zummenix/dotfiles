@@ -5,6 +5,7 @@ line-number = "relative"
 cursorline = true
 rulers = [100]
 color-modes = true
+linewise-paste = false
 
 [editor.cursor-shape]
 insert = "underline"

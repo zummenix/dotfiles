@@ -101,6 +101,12 @@ symlink "$PROJECTS_DIR/dotfiles/helix" "$CONFIG_DIR/helix"
 desc "Symlink fish settings"
 symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 
+desc "Symlink alacritty settings"
+symlink "$PROJECTS_DIR/dotfiles/alacritty" "$CONFIG_DIR/alacritty"
+
+desc "Symlink zellij settings"
+symlink "$PROJECTS_DIR/dotfiles/zellij" "$CONFIG_DIR/zellij"
+
 desc "Symlink tig settings"
 symlink "$PROJECTS_DIR/dotfiles/tig/.tigrc" "$HOME/.tigrc"
 

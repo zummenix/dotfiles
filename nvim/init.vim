@@ -19,7 +19,6 @@ Plug 'dag/vim-fish'
 Plug 'henrik/vim-indexed-search'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 
@@ -74,19 +73,6 @@ function! ReadOnlyStatus() abort
     return &readonly ? ', readonly' : ''
 endfunction
 
-function! StatusDiagnostic() abort
-    let info = get(b:, 'coc_diagnostic_info', {})
-    if empty(info) | return '' | endif
-    let msgs = []
-    if get(info, 'error', 0)
-        call add(msgs, 'E:' . info['error'])
-    endif
-    if get(info, 'warning', 0)
-        call add(msgs, 'W:' . info['warning'])
-    endif
-    return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
-endfunction
-
 set laststatus=2
 set statusline=
 set statusline+=\ %f
@@ -94,7 +80,6 @@ set statusline+=%{ReadOnlyStatus()}
 set statusline+=%{ModifiedStatus()}
 set statusline+=%y
 set statusline+=\ %q
-set statusline+=\ %{StatusDiagnostic()}
 set statusline+=%=%l\:%-4.c\ %L
 
 filetype plugin indent on
@@ -129,50 +114,6 @@ inoremap <> <><esc>i
 inoremap "" ""<esc>i
 inoremap '' ''<esc>i
 inoremap `` ``<esc>i
-
-" " <tab>: completion.
-function! CheckBackSpace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" Insert <tab> when previous text is space, refresh completion if not.
-inoremap <silent><expr> <TAB>
-    \ coc#pum#visible() ? coc#pum#next(1):
-    \ CheckBackSpace() ? "\<Tab>" :
-    \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-
-" To navigate diagnostics
-nmap <silent> gn <Plug>(coc-diagnostic-next)
-nmap <silent> gp <Plug>(coc-diagnostic-prev)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gs :<C-u>CocList -I symbols<cr>
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
 
 " Add more granularity to undo history.
 inoremap <space> <space><c-g>u

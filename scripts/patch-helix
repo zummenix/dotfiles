@@ -25,12 +25,14 @@ for patch_branch in "${my_patch_branches[@]}"; do
   desc "Updating $patch_branch"
   git checkout "$patch_branch"
   if test $? -ne 0; then
+    git checkout master
     exit 1
   fi
 
   git rebase master
   if test $? -ne 0; then
     git rebase --abort
+    git checkout master
     exit 1
   fi
 done
@@ -44,6 +46,7 @@ for patch_branch in "${my_patch_branches[@]}"; do
   git rebase "$patch_branch"
   if test $? -ne 0; then
     git rebase --abort
+    git checkout master
     exit 1
   fi
 done

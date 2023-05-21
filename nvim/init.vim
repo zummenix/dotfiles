@@ -2,21 +2,12 @@
 language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'airblade/vim-gitgutter'
-Plug 'f-person/git-blame.nvim'
-Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
 Plug 'wincent/terminus'
 Plug 'wincent/ferret'
 Plug 'tpope/vim-commentary'
-Plug 'elmcast/elm-vim'
 Plug 'justinmk/vim-dirvish'
-Plug 'neoclide/vim-jsx-improve'
-Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
-Plug 'pearofducks/ansible-vim'
-Plug 'dag/vim-fish'
-Plug 'henrik/vim-indexed-search'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 call plug#end()
@@ -56,9 +47,7 @@ vim.opt.listchars = 'tab:►-,trail:·'
 vim.opt.list = true
 
 -- Plugins
-vim.g.elm_setup_keybindings = 0
 vim.g.fzf_layout = { down = "~20%" }
-vim.g.gitblame_enabled = 0
 EOM
 
 set shortmess+=c
@@ -88,17 +77,8 @@ let mapleader="\<SPACE>"
 
 nmap <leader><leader> <c-w>
 
-function! OpenAndConfigureMyTerminal(vertical) abort
-    if a:vertical | vnew | else | new | endif | terminal
-    setlocal nonumber norelativenumber
-    tnoremap <buffer> <esc> <c-\><c-n>
-    startinsert
-endfunction
-
 nnoremap <leader>p :GFiles<cr>
 nnoremap <leader>P :Files<cr>
-nnoremap <leader>t :call OpenAndConfigureMyTerminal(1)<cr>
-nnoremap <leader>T :call OpenAndConfigureMyTerminal(0)<cr>
 
 " Redraw the window.
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>

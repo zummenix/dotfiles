@@ -1,5 +1,7 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
+
 brew "gettext"
 brew "cmake"
 brew "exercism"
@@ -26,3 +28,5 @@ brew "ffmpeg"
 brew "zola"
 brew "rust-analyzer"
 brew "yq"
+
+cask "font-source-code-pro"

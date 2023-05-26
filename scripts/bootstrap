@@ -123,7 +123,6 @@ git-cargo-install "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovi
 
 cargo-install cargo-bloat
 cargo-install cargo-outdated
-cargo-install cargo-duplicates
 cargo-install cargo-insta
 cargo-install cargo-diet
 cargo-install cargo-audit

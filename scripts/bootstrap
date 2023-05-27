@@ -101,6 +101,9 @@ symlink "$PROJECTS_DIR/dotfiles/helix" "$CONFIG_DIR/helix"
 desc "Symlink fish settings"
 symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 
+desc "Symlink wezterm settings"
+symlink "$PROJECTS_DIR/dotfiles/wezterm" "$CONFIG_DIR/wezterm"
+
 desc "Symlink alacritty settings"
 symlink "$PROJECTS_DIR/dotfiles/alacritty" "$CONFIG_DIR/alacritty"
 

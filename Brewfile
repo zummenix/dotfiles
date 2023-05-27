@@ -29,3 +29,4 @@ brew "rust-analyzer"
 brew "yq"
 
 cask "font-source-code-pro"
+cask "wezterm"

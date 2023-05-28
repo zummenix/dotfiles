@@ -1,5 +1,5 @@
 bind status D ?@trash %(file)
 
-color cursor color21 green bold
+color cursor color18 green bold
 color title-focus default color18
 

@@ -14,9 +14,6 @@ config.font_rules = {
 }
 
 config.colors = {
-  cursor_bg = '#A7ADBA',
-  cursor_fg = '#2B303B',
-
   tab_bar = {
     inactive_tab_edge = '#343D46',
     active_tab = {
@@ -49,5 +46,7 @@ config.window_frame = {
   active_titlebar_bg = '#343D46',
   inactive_titlebar_bg = '#4F5B66',
 }
+
+config.color_scheme = 'Ocean (base16)'
 
 return config

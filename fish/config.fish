@@ -5,11 +5,6 @@ set PATH "$HOME/projects/dotfiles/scripts" $PATH
 set -Ux fish_user_paths /opt/homebrew/bin/ $fish_user_paths
 set -Ux LC_ALL "en_US.UTF-8"
 
-if status --is-interactive
-    set BASE16_SHELL "$HOME/.config/base16-shell/"
-    source "$BASE16_SHELL/profile_helper.fish"
-end
-
 set fish_color_command white
 set fish_color_comment white
 set fish_color_cwd white

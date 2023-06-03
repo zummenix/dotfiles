@@ -2,7 +2,6 @@
 language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'chriskempson/base16-vim'
 Plug 'wincent/terminus'
 Plug 'wincent/ferret'
 Plug 'tpope/vim-commentary'
@@ -107,12 +106,5 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-
-if filereadable(expand("~/.vimrc_background"))
-    set termguicolors
-    source ~/.vimrc_background
-endif
-
 hi StatusLine ctermfg=12 ctermbg=11 guifg=#a7adba guibg=#21252e
 hi Error ctermfg=1 ctermbg=10 guifg=#bf616a guibg=#343d46
-

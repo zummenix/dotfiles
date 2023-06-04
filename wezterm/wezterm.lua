@@ -28,20 +28,11 @@ config.colors = {
       bg_color = '#2B303B',
       fg_color = '#C0C5CE',
     },
-
-    -- The new tab button that let you create new tabs
-    new_tab = {
-      bg_color = '#2B303B',
-      fg_color = '#A7ADBA',
-    },
-    new_tab_hover = {
-      bg_color = '#2B303B',
-      fg_color = '#C0C5CE',
-    },
   },
 }
 
 config.tab_bar_at_bottom = true
+config.show_new_tab_button_in_tab_bar = false
 config.window_frame = {
   active_titlebar_bg = '#343D46',
   inactive_titlebar_bg = '#4F5B66',

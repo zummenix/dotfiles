@@ -1,6 +1,7 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions" # wezterm nightly
 
 brew "gettext"
 brew "cmake"
@@ -29,4 +30,4 @@ brew "rust-analyzer"
 brew "yq"
 
 cask "font-source-code-pro"
-cask "wezterm"
+cask "wezterm-nightly", greedy: true

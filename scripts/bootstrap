@@ -151,11 +151,11 @@ echo "Launching neovim."
 nvim +PlugUpgrade +PlugInstall +PlugClean +PlugUpdate +qa
 
 desc "Switch current shell to fish"
-if test $(echo "$SHELL" | grep fish); then
+if test "$(echo "$SHELL" | grep fish)"; then
     echo "Already fish."
 else
     LINE="$(which fish)"
     FILE=/etc/shells
     grep -qF -- "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
-    chsh -s $LINE && echo "Done. Please open a new terminal tab or window to see the change."
+    chsh -s "$LINE" && echo "Done. Please open a new terminal tab or window to see the change."
 fi

@@ -130,6 +130,7 @@ cargo-install cargo-audit
 cargo-install bottom
 cargo-install ripgrep
 cargo-install tokei
+cargo-install typos-cli
 
 cargo-install itm
 cargo-install cargo-binutils

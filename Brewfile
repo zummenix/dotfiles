@@ -27,6 +27,7 @@ brew "ffmpeg"
 brew "zola"
 brew "rust-analyzer"
 brew "yq"
+brew "shellcheck"
 
 cask "font-source-code-pro"
 cask "wezterm-nightly", greedy: true

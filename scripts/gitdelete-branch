@@ -11,7 +11,7 @@ function _delete_branch_force {
 }
 
 function _ask_delete_remote_branch {
-    read -p "Do you want to remove a remote branch? [y/n] " CONFIRMATION
+    read -rp "Do you want to remove a remote branch? [y/n] " CONFIRMATION
     if test "$CONFIRMATION" = "y"; then
         git push -d origin "$BRANCH_NAME"
     fi

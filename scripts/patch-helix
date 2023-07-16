@@ -52,7 +52,6 @@ for patch_branch in "${my_patch_branches[@]}"; do
 done
 
 desc "Compiling helix"
-cargo install --path helix-term --locked
-echo "Size: $(du -h "$(which hx)" | cut -f1)"
+cargo install --path helix-term --locked && strip-pretty hx
 
 git checkout master

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Strips binary and prints its size before and after.
+
+function _bail {
+    echo "$1" 1>&2 ; exit 1
+}
+
+function _strip {
+    local size_before
+    local size_after
+    size_before=$(du -h "$1" | cut -f1)
+    test -z "$size_before" && _bail "Failed to get file size before strip"
+    strip "$1" || _bail "Failed to strip the executable"
+    size_after=$(du -h "$1" | cut -f1)
+    test -z "$size_after" && _bail "Failed to get file size after strip"
+    echo "Stripped $size_after, was $size_before"
+}
+
+BIN_NAME="$1"
+test -z "$BIN_NAME" && _bail "Usage: strip-pretty BIN_NAME"
+
+_strip "$(which "$BIN_NAME")"

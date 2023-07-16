@@ -31,13 +31,6 @@ function npm-install {
     npm install --global "$1"
 }
 
-# Installs a tool from a git repository.
-function git-cargo-install {
-    desc "Installing $2"
-    pull "$1" "$2" && cd "$2" && \
-        sh "$HOME"/projects/dotfiles/scripts/cargo-install-stripped
-}
-
 # Installs a tool.
 function cargo-install {
     desc "Installing $1"
@@ -118,8 +111,15 @@ symlink "$PROJECTS_DIR/dotfiles/git/.gitignore-global" "$HOME/.gitignore-global"
 
 npm-install "vscode-langservers-extracted"
 
-git-cargo-install "git@github.com:zummenix/xcopen.git" "$PROJECTS_DIR/xcopen"
-git-cargo-install "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"
+desc "Installing xcopen"
+pull "git@github.com:zummenix/xcopen.git" "$PROJECTS_DIR/xcopen"
+cargo install --path "$PROJECTS_DIR/xcopen" && \
+    sh "$PROJECTS_DIR"/dotfiles/scripts/strip-pretty xcopen
+
+desc "Installin mprovision"
+pull "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"
+cargo install --path "$PROJECTS_DIR/mprovision/crates/cli" && \
+    sh "$PROJECTS_DIR"/dotfiles/scripts/strip-pretty mprovision
 
 cargo-install cargo-bloat
 cargo-install cargo-outdated

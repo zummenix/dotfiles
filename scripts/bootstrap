@@ -8,7 +8,7 @@ function desc {
     tput sgr0
 }
 
-# Ensures a direcotry exists.
+# Ensures a directory exists.
 function dir {
     if test -d "$1"; then
         echo "$1 exists."

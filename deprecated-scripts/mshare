@@ -2,7 +2,7 @@
 
 # The script transfers provided *.png or *.mp4 files using SFTP.
 #
-# Dependencies (all available on macOS without additonal installation):
+# Dependencies (all available on macOS without additional installation):
 # - open - open a link in a browser
 # - scp - copy a media file securely to a server (SFTP)
 #

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Lists all bin names of a cargo package or workspace
+
+metadata=$(cargo metadata --format-version 1) || exit 1;
+
+bin_names=$(echo "$metadata" | jq -r '.packages[].targets[] | select(.kind[] | contains("bin")) | .name')
+
+for name in $bin_names; do
+  echo "$name"
+done

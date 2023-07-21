@@ -17,7 +17,6 @@ function desc {
 
 my_patch_branches=(
   indication-of-current-search-match
-  linewise-paste-config-option
   severity-marker-in-diagnostics-picker
 )
 

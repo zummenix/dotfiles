@@ -53,7 +53,4 @@ done
 desc "Compiling helix"
 cargo install --path helix-term --locked && strip-pretty hx
 
-desc "Build Grammars"
-cargo run --release -- -g build
-
 git checkout master

@@ -18,6 +18,7 @@ function desc {
 my_patch_branches=(
   indication-of-current-search-match
   severity-marker-in-diagnostics-picker
+  bump-ts-git-commit
 )
 
 for patch_branch in "${my_patch_branches[@]}"; do

@@ -1,13 +1,10 @@
-tap "homebrew/core"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions" # wezterm nightly
 
 brew "gettext"
 brew "cmake"
-brew "exercism"
 brew "fish"
-brew "git-flow"
 brew "hexedit"
 brew "libtool"
 brew "mpv"

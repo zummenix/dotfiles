@@ -1,9 +1,12 @@
 # My dotfiles
 
-`fish`, `neovim`, `helix`, `tig`
+My main tools are `wezterm` terminal, `fish` shell, `helix` editor, `tig` git browser.
 
 To setup a new machine:
 
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/zummenix/dotfiles/master/scripts/bootstrap | bash
-```
+1. Setup github with ssh key
+2. Install homebrew manually
+3. Create `projects` directory
+4. Clone this repository
+5. Run bootstrap script
+6. Open wezterm and run bootstrap script again

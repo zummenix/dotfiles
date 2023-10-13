@@ -8,6 +8,13 @@ function desc {
     tput sgr0
 }
 
+# Echos out an error.
+function error {
+    tput bold && tput setaf 1
+    echo "  $1"
+    tput sgr0
+}
+
 # Ensures a directory exists.
 function dir {
     if test -d "$1"; then
@@ -53,7 +60,8 @@ desc "Ensure homebrew is up to date"
 if test -x "$(command -v brew)"; then
     brew update
 else
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    error "brew is not installed. Please install brew manually"
+    exit 1
 fi
 
 desc "Ensure rustup is installed"

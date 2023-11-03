@@ -140,6 +140,7 @@ cargo-install bottom
 cargo-install ripgrep
 cargo-install tokei
 cargo-install typos-cli
+cargo-install git-delta
 cargo-install ast-grep
 
 cargo-install itm

@@ -5,19 +5,21 @@
     rebase = false
 [core]
     excludesFile = ~/.gitignore-global
-    pager = delta
+    pager = delta --diff-so-fancy
+[delta]
+    navigate = true
+[interactive]
+    diffFilter = delta --color-only --diff-so-fancy
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
 [merge]
-    tool = nvimdiff
+    conflictstyle = diff3
 [mergetool]
     prompt = true
-[mergetool "nvimdiff"]
-    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]
     prompt = false
 [diff]
-    tool = nvimdiff
+    colorMoved = default

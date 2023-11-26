@@ -22,16 +22,30 @@ my_patch_branches=(
 )
 
 for patch_branch in "${my_patch_branches[@]}"; do
-  desc "Updating $patch_branch"
+  desc "Pulling $patch_branch"
   git checkout "$patch_branch"
   if test $? -ne 0; then
     git checkout master
     exit 1
   fi
 
+  git pull --rebase
+  if test $? -ne 0; then
+    git checkout master
+    exit 1
+  fi
+
+  desc "Updating $patch_branch"
   git rebase master
   if test $? -ne 0; then
     git rebase --abort
+    git checkout master
+    exit 1
+  fi
+
+  desc "Pushing back $patch_branch"
+  git push --force
+  if test $? -ne 0; then
     git checkout master
     exit 1
   fi

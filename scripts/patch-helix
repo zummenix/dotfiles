@@ -21,6 +21,14 @@ my_patch_branches=(
   modern-rust
 )
 
+desc "Pulling master"
+git checkout master
+git pull
+if test $? -ne 0; then
+  git checkout master
+  exit 1
+fi
+
 for patch_branch in "${my_patch_branches[@]}"; do
   desc "Pulling $patch_branch"
   git checkout "$patch_branch"

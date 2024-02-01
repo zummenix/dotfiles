@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Compresses video file with high compression settings. Useful for screen
+# recordings.
+
+function _bail {
+    echo "$1" 1>&2 ; exit 1
+}
+
+test -z "$1" && _bail "Usage: video-compress FILE_PATH"
+
+FILE_PATH_WITHOUT_EXT="${1%.*}"
+
+ffmpeg -i "$1" -vcodec libx264 -crf 20 "Compressed $FILE_PATH_WITHOUT_EXT.mp4"

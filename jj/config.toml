@@ -3,4 +3,4 @@ name = "Aleksey Kuznetsov"
 email = "zummenix@gmail.com"
 
 [ui]
-default-command = "log"
+default-command = "status"

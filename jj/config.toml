@@ -4,3 +4,7 @@ email = "zummenix@gmail.com"
 
 [ui]
 default-command = "status"
+
+[templates]
+log = 'builtin_log_comfortable'
+

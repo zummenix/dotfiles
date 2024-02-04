@@ -118,6 +118,9 @@ symlink "$PROJECTS_DIR/dotfiles/git/.gitconfig" "$HOME/.gitconfig"
 desc "Symlink global git ignore"
 symlink "$PROJECTS_DIR/dotfiles/git/.gitignore-global" "$HOME/.gitignore-global"
 
+desc "Symlink jj config"
+symlink "$PROJECTS_DIR/dotfiles/jj/config.toml" "$HOME/Library/Application Support/jj/config.toml"
+
 npm-install "vscode-langservers-extracted"
 
 desc "Installing xcopen"

@@ -8,18 +8,23 @@ function fish_prompt --description 'Write out the prompt'
     echo -n "in  "(prompt_pwd)"  "
 
     if test -n "$git_branch"
-        set -l git_status (git status --porcelain 2> /dev/null)
-        echo -n "git "
-        if test -z "$git_status"
-            set_color green --bold
-            echo -n "•"
+        set -l jj_info (jj log --no-graph --limit 1 -r ..@ -T prompt_show_oneline 2> /dev/null)
+        if test -n "$jj_info"
+            echo -n "jj  $jj_info"
         else
-            set_color red --bold
-            echo -n "•"
+            set -l git_status (git status --porcelain 2> /dev/null)
+            echo -n "git "
+            if test -z "$git_status"
+                set_color green --bold
+                echo -n "•"
+            else
+                set_color red --bold
+                echo -n "•"
+            end
+            set_color reset
+            set_color $line_color
+            echo -n " [$git_branch]"
         end
-        set_color reset
-        set_color $line_color
-        echo -n " [$git_branch]"
     end
 
     echo ""

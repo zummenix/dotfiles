@@ -4,6 +4,8 @@ email = "zummenix@gmail.com"
 
 [ui]
 default-command = "status"
+diff.format = "git"
+pager = ["sh", "-c", "delta --diff-so-fancy | less -RFX"]
 
 [templates]
 log = 'builtin_log_comfortable'

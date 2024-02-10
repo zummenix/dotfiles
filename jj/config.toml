@@ -16,5 +16,6 @@ concat(
   "[" ++ builtin_change_id_with_hidden_and_divergent_info ++ "] ",
   if(empty, "○", "⦿") ++ " ",
   if(description, description.first_line(), description_placeholder),
+  "\n",
 )
 '''

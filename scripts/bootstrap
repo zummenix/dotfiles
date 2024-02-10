@@ -138,6 +138,7 @@ cargo-install cargo-outdated
 cargo-install cargo-insta
 cargo-install cargo-diet
 cargo-install cargo-audit
+cargo-install cargo-nextest
 
 cargo-install bottom
 cargo-install ripgrep

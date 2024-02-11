@@ -133,6 +133,11 @@ pull "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"
 cargo install --path "$PROJECTS_DIR/mprovision/crates/cli" && \
     sh "$PROJECTS_DIR"/dotfiles/scripts/strip-pretty mprovision
 
+desc "Installing jj"
+pull "git@github.com:zummenix/jj.git" "$PROJECTS_DIR/jj"
+cargo install --path "$PROJECTS_DIR/jj/cli" --locked && \
+    sh "$PROJECTS_DIR"/dotfiles/scripts/strip-pretty jj
+
 cargo-install cargo-bloat
 cargo-install cargo-outdated
 cargo-install cargo-insta

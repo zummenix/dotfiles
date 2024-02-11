@@ -25,7 +25,6 @@ brew "zola"
 brew "yq"
 brew "jq"
 brew "shellcheck"
-brew "jj"
 
 cask "font-source-code-pro"
 cask "wezterm-nightly", greedy: true

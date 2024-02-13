@@ -8,7 +8,7 @@ function fish_prompt --description 'Write out the prompt'
     echo -n "in  "(prompt_pwd)"  "
 
     if test -n "$git_branch"
-        set -l jj_info (jj log --no-graph --limit 1 -r ..@ -T prompt_show_oneline 2> /dev/null)
+        set -l jj_info (jj show -T prompt_show_oneline -s | head -n1 2> /dev/null)
         if test -n "$jj_info"
             echo -n "jj  $jj_info"
         else

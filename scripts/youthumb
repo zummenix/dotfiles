@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# A script to get a high resolution thumbnail of an youttube video.
+# Get a high resolution thumbnail of an youtube video.
 # Uses yt-dlp command line tool.
 
 function _bail {
@@ -10,7 +10,7 @@ function _bail {
 test -z "$1" && _bail "Usage: youthumb YOUTUBE_URL"
 
 yt-dlp "$1" --list-thumbnails | \
-    # $2 and $3 are numbers that represent image resolution, so the image is 100% available. (?)
+    # $2 and $3 are numbers that represent image resolution, so the image is 100% available (?).
     awk '{ if ($2 ~ /^[0-9]+$/ && $3 ~ /^[0-9]+$/) print $0 }' | \
     # Assuming the record for a high resolution thumbnail is at the end of the list.
     tail -n1 | \

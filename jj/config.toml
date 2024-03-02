@@ -4,9 +4,12 @@ email = "zummenix@gmail.com"
 
 [ui]
 log-synthetic-elided-nodes = true
-default-command = "status"
+default-command = "log_with_limit"
 diff.format = "git"
 pager = ["sh", "-c", "delta --diff-so-fancy | less -RFX"]
+
+[aliases]
+log_with_limit = ["log", "--limit", "13"]
 
 [templates]
 log = 'log_oneline'

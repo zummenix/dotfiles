@@ -3,7 +3,6 @@ name = "Aleksey Kuznetsov"
 email = "zummenix@gmail.com"
 
 [ui]
-log-synthetic-elided-nodes = true
 default-command = "log_with_limit"
 diff.format = "git"
 pager = ["sh", "-c", "delta --diff-so-fancy | less -RFX"]

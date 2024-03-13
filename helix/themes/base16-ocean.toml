@@ -3,7 +3,7 @@
 # Template author: Tinted Theming (https://github.com/tinted-theming)
 # Modified by me
 "attributes" = "base09"
-"comment" = { fg = "base03" }
+"comment" = { fg = "base04" }
 "constant" = "base09"
 "constant.character.escape" = "base0C"
 "constant.numeric" = "base09"

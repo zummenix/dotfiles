@@ -9,6 +9,16 @@ pager = ["sh", "-c", "delta --diff-so-fancy | less -RFX"]
 
 [templates]
 log = 'log_oneline'
+log_node = '''
+if(self,
+  if(current_working_copy, "@",
+    if(root, "┴",
+      if(immutable, label("timestamp", "✦"), "⦿")
+    )
+  ),
+  label("elided", "◌"),
+)
+'''
 
 [template-aliases]
 prompt_show_oneline = '''

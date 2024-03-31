@@ -32,7 +32,7 @@ concat(
 
 log_oneline = '''
 if(root,
-  builtin_log_root(change_id, commit_id),
+  format_root_commit(self),
   label(if(current_working_copy, "working_copy"),
     concat(
       separate(" ",

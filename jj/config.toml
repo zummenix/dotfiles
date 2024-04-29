@@ -23,7 +23,7 @@ if(self,
 [template-aliases]
 prompt_show_oneline = '''
 concat(
-  "[" ++ builtin_change_id_with_hidden_and_divergent_info ++ "] ",
+  "[" ++ format_short_change_id_with_hidden_and_divergent_info(self) ++ "] ",
   if(empty, "○", "⦿") ++ " ",
   if(description, description.first_line(), description_placeholder),
   "\n",
@@ -38,7 +38,7 @@ if(root,
       separate(" ",
         committer.timestamp().local().format("%F %R"),
         if(author.email(), author.username().substr(0, 10), email_placeholder),
-        builtin_change_id_with_hidden_and_divergent_info,
+        format_short_change_id_with_hidden_and_divergent_info(self),
         if(conflict, label("conflict", "conflict")),
         if(empty, label("empty", "(empty)")),
         if(description, description.first_line(), description_placeholder),

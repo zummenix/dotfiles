@@ -144,6 +144,7 @@ cargo-install cargo-insta
 cargo-install cargo-diet
 cargo-install cargo-audit
 cargo-install cargo-nextest
+cargo-install cargo-semver-checks
 
 cargo-install bottom
 cargo-install ripgrep

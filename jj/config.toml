@@ -42,10 +42,10 @@ if(root,
         if(conflict, label("conflict", "conflict")),
         if(empty, label("empty", "(empty)")),
         if(description, description.first_line(), description_placeholder),
-        branches,
+        bookmarks,
         tags,
         working_copies,
-        git_head,
+        git_refs
       ) ++ "\n",
     ),
   )

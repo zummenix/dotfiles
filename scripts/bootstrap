@@ -145,6 +145,7 @@ cargo-install cargo-insta
 cargo-install cargo-diet
 cargo-install cargo-audit
 cargo-install cargo-nextest
+cargo-install cargo-llvm-cov
 cargo-install cargo-semver-checks
 cargo-install cargo-leptos
 cargo-install leptosfmt

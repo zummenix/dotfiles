@@ -20,11 +20,10 @@ my_patch_branches=(
   modern-rust
 )
 
-desc "Pulling master"
+desc "Pulling upstream master"
 git checkout master
-git pull
+git pull upstream master
 if test $? -ne 0; then
-  git checkout master
   exit 1
 fi
 
@@ -72,7 +71,12 @@ for patch_branch in "${my_patch_branches[@]}"; do
   fi
 done
 
+desc "Pushing sandbox"
+git push --force --set-upstream origin sandbox
+
 desc "Compiling helix"
 cargo install --path helix-term --locked && strip-pretty hx
 
+desc "Syncing my master"
 git checkout master
+git push

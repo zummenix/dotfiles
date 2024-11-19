@@ -26,6 +26,7 @@ brew "yq"
 brew "jq"
 brew "shellcheck"
 brew "yt-dlp"
+brew "podman"
 
 cask "font-source-code-pro"
 cask "wezterm-nightly", greedy: true

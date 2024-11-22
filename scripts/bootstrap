@@ -27,7 +27,8 @@ function dir {
 # Ensures a git repo is up to date.
 function pull {
     if test -d "$2"; then
-        cd "$2" && ((jj git fetch && (jj new master || jj new main)) || git pull)
+        cd "$2" || exit 1
+        { jj git fetch && (jj new master || jj new main); } || git pull
     else
         git clone "$1" "$2"
     fi

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
-cd ~/Desktop
-trash *.png *.jpg *.mp4 *.mov
+find ~/Desktop -maxdepth 1 \
+  \( -name '*.png' -o -name '*.jpg' -o -name '*.mp4' -o -name '*.mov' \) \
+  -print -exec trash "{}" +

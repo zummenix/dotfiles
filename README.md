@@ -1,6 +1,7 @@
 # My dotfiles
 
-My main tools are `wezterm` terminal, `fish` shell, `helix` editor, `tig` git browser.
+My main tools are `wezterm` terminal, `fish` shell, `helix` editor, `jj` git
+frontend (with `git-delta` for diffs).
 
 To setup a new machine:
 

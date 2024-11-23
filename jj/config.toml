@@ -45,7 +45,7 @@ if(root,
         bookmarks,
         tags,
         working_copies,
-        git_refs
+        if(self.git_head(), label("git_head", "HEAD")),
       ) ++ "\n",
     ),
   )

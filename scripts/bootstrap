@@ -89,6 +89,7 @@ dir "$PROJECTS_DIR"
 
 desc "Remove legacy symlinks"
 unlink "$CONFIG_DIR/zellij" || true
+unlink "$CONFIG_DIR/alacritty" || true
 
 desc "Pull dotfiles repository"
 pull "https://github.com/zummenix/dotfiles" "$PROJECTS_DIR/dotfiles"
@@ -107,9 +108,6 @@ symlink "$PROJECTS_DIR/dotfiles/fish" "$CONFIG_DIR/fish"
 
 desc "Symlink wezterm settings"
 symlink "$PROJECTS_DIR/dotfiles/wezterm" "$CONFIG_DIR/wezterm"
-
-desc "Symlink alacritty settings"
-symlink "$PROJECTS_DIR/dotfiles/alacritty" "$CONFIG_DIR/alacritty"
 
 desc "Symlink tig settings"
 symlink "$PROJECTS_DIR/dotfiles/tig/.tigrc" "$HOME/.tigrc"

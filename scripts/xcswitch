@@ -12,5 +12,5 @@ CURRENT_XCODE=$(xcode-select -p)
 
 find /Applications -type d -maxdepth 1 -name 'Xcode*' -print |
     fzf --header "Current is $CURRENT_XCODE" |
-    xargs -I{} sudo xcode-select --switch "{}Contents/Developer" &&
+    xargs -I{} sudo xcode-select --switch "{}/Contents/Developer" &&
     xcode-select --print-path

@@ -6,7 +6,8 @@ function list_apps {
     find "$1" -type d -maxdepth 1 -name '*.app' | sed 's#.*/##' | sed 's/.app$//'
 }
 
-paste -d'\n' <(list_apps /Applications) <(list_apps /System/Applications/Utilities) | \
+paste -d'\n' <(list_apps /Applications) <(list_apps /System/Applications) <(list_apps /System/Applications/Utilities) | \
+    xargs -I{} echo "{}" | \
     sort -if | \
     fzf --header "Select app to open" | \
     xargs -I{} osascript -e "tell application \"{}\" to activate"

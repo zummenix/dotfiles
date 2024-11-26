@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# apps launcher that replaces Spotlight
+
+function list_apps {
+    find "$1" -type d -maxdepth 1 -name '*.app' | sed 's#.*/##' | sed 's/.app$//'
+}
+
+paste -d'\n' <(list_apps /Applications) <(list_apps /System/Applications/Utilities) | \
+    sort -if | \
+    fzf --header "Select app to open" | \
+    xargs -I{} osascript -e "tell application \"{}\" to activate"
+

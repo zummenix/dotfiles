@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+tmp_file=$(mktemp)
+py_file="$tmp_file.py"
+mv "$tmp_file" "$py_file"
+
+echo "print(\"Hello $USER\")" > "$py_file"
+
+current_pane_id=$WEZTERM_PANE
+
+pane_id=$(wezterm cli split-pane --right)
+pane_cmd="echo \"$py_file\" | entr -c python3 /_"
+echo "$pane_cmd" | wezterm cli send-text --pane-id "$pane_id" --no-paste
+
+wezterm cli activate-pane --pane-id "$current_pane_id"
+
+hx "$py_file"
+
+wezterm cli kill-pane --pane-id "$pane_id"
+
+rm "$py_file"

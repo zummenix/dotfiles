@@ -27,6 +27,7 @@ brew "yt-dlp"
 brew "podman"
 brew "jj"
 brew "asciinema"
+brew "fzf"
 
 cask "font-source-code-pro"
 cask "wezterm-nightly", greedy: true

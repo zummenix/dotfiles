@@ -1,6 +1,5 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions" # wezterm nightly
 
 brew "cmake"
 brew "fish"
@@ -30,4 +29,4 @@ brew "asciinema"
 brew "fzf"
 
 cask "font-source-code-pro"
-cask "wezterm-nightly", greedy: true
+cask "wezterm"

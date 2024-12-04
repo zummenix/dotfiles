@@ -2,13 +2,6 @@
 language en_US.UTF-8
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'wincent/terminus'
-Plug 'wincent/ferret'
-Plug 'tpope/vim-commentary'
-Plug 'justinmk/vim-dirvish'
-Plug 'machakann/vim-highlightedyank'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 call plug#end()
 
 

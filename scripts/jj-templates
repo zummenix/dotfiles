@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-jj config list --include-defaults template-aliases | awk -F= '{ print($1) }' | awk -F. '{ print($2) }'

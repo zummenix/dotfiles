@@ -1,6 +1,0 @@
-{
-    "coc.preferences.formatOnSaveFiletypes": ["rust"],
-    "diagnostic.errorSign": "•",
-    "diagnostic.warningSign": "•",
-    "suggest.noselect": true
-}

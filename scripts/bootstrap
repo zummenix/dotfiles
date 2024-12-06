@@ -90,15 +90,13 @@ dir "$PROJECTS_DIR"
 desc "Remove legacy symlinks"
 unlink "$CONFIG_DIR/zellij" || true
 unlink "$CONFIG_DIR/alacritty" || true
+unlink "$CONFIG_DIR/nvim" || true
 
 desc "Pull dotfiles repository"
 pull "https://github.com/zummenix/dotfiles" "$PROJECTS_DIR/dotfiles"
 
 desc "Install/cleanup dependencies using Brewfile"
 brew bundle --no-lock --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v
-
-desc "Symlink neovim settings"
-symlink "$PROJECTS_DIR/dotfiles/nvim" "$CONFIG_DIR/nvim"
 
 desc "Symlink helix settings"
 symlink "$PROJECTS_DIR/dotfiles/helix" "$CONFIG_DIR/helix"
@@ -153,21 +151,6 @@ cargo-install ast-grep
 
 cargo-install itm
 cargo-install cargo-binutils
-
-desc "Ensure vim-plug is installed"
-PLUG_VIM="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim
-if test -f "$PLUG_VIM"; then
-    echo "vim-plug is installed."
-else
-    echo "Downloading vim-plug."
-    curl -fLo "$PLUG_VIM" --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-
-
-desc "Ensure neovim plugins are up to date"
-echo "Launching neovim."
-nvim +PlugUpgrade +PlugInstall +PlugClean +PlugUpdate +qa
 
 desc "Switch current shell to fish"
 if test "$(echo "$SHELL" | grep fish)"; then

@@ -37,7 +37,7 @@ if(root,
     concat(
       separate(" ",
         committer.timestamp().local().format("%F %R"),
-        if(author.email(), author.username().substr(0, 10), email_placeholder),
+        if(author.email(), author.email().local().substr(0, 10), email_placeholder),
         format_short_change_id_with_hidden_and_divergent_info(self),
         if(conflict, label("conflict", "conflict")),
         if(empty, label("empty", "(empty)")),

@@ -29,3 +29,4 @@ brew "fzf"
 
 cask "font-source-code-pro"
 cask "wezterm"
+cask "amneziavpn"

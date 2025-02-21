@@ -78,8 +78,6 @@ rustup update stable
 
 rustup component add rust-analyzer
 rustup component add llvm-tools-preview
-rustup target add thumbv7em-none-eabihf
-rustup target add wasm32-unknown-unknown
 
 desc "Ensure ~/.config directory exists"
 dir "$CONFIG_DIR"

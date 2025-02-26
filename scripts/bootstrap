@@ -90,9 +90,6 @@ unlink "$CONFIG_DIR/zellij" || true
 unlink "$CONFIG_DIR/alacritty" || true
 unlink "$CONFIG_DIR/nvim" || true
 
-desc "Pull dotfiles repository"
-pull "https://github.com/zummenix/dotfiles" "$PROJECTS_DIR/dotfiles"
-
 desc "Install/cleanup dependencies using Brewfile"
 brew bundle --no-lock --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v
 

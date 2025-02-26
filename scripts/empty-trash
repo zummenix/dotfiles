@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+read -rp "Are you sure you want to permanently empty the trash? [y/n] " CONFIRMATION
+if test "$CONFIRMATION" = "y"; then
+    osascript -e 'tell application "Finder" to empty trash'
+fi

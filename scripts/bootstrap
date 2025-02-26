@@ -78,8 +78,6 @@ rustup update stable
 
 rustup component add rust-analyzer
 rustup component add llvm-tools-preview
-rustup target add thumbv7em-none-eabihf
-rustup target add wasm32-unknown-unknown
 
 desc "Ensure ~/.config directory exists"
 dir "$CONFIG_DIR"
@@ -91,9 +89,6 @@ desc "Remove legacy symlinks"
 unlink "$CONFIG_DIR/zellij" || true
 unlink "$CONFIG_DIR/alacritty" || true
 unlink "$CONFIG_DIR/nvim" || true
-
-desc "Pull dotfiles repository"
-pull "https://github.com/zummenix/dotfiles" "$PROJECTS_DIR/dotfiles"
 
 desc "Install/cleanup dependencies using Brewfile"
 brew bundle --no-lock --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v

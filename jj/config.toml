@@ -5,7 +5,7 @@ email = "zummenix@gmail.com"
 [ui]
 default-command = ["log", "--limit", "13"]
 diff.format = "git"
-pager = ["sh", "-c", "delta --diff-so-fancy | less -RFX"]
+pager = ["sh", "-c", "delta --diff-so-fancy | less -RX"]
 
 [templates]
 log = 'log_oneline'

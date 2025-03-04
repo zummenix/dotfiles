@@ -6,6 +6,10 @@ cursorline = true
 rulers = [100]
 color-modes = true
 bufferline = "multiple"
+end-of-line-diagnostics = "hint"
+
+[editor.inline-diagnostics]
+prefix-len = 7
 
 [editor.cursor-shape]
 insert = "underline"
@@ -22,3 +26,10 @@ display-messages = true
 
 [editor.file-picker]
 hidden = false
+
+[keys.normal."space"]
+i = [
+  ":toggle-option inline-diagnostics.other-lines hint disable",
+  ":toggle-option inline-diagnostics.cursor-line hint disable"
+]
+

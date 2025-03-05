@@ -28,6 +28,9 @@ display-messages = true
 hidden = false
 
 [keys.normal."space"]
+# This does't work quite as expected.
+# See https://github.com/helix-editor/helix/discussions/13023
+# Possibly waiting on https://github.com/helix-editor/helix/issues/8853
 i = [
   ":toggle-option inline-diagnostics.other-lines hint disable",
   ":toggle-option inline-diagnostics.cursor-line hint disable"

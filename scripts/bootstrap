@@ -91,7 +91,7 @@ unlink "$CONFIG_DIR/alacritty" || true
 unlink "$CONFIG_DIR/nvim" || true
 
 desc "Install/cleanup dependencies using Brewfile"
-brew bundle --no-lock --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v
+brew bundle --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v
 
 desc "Symlink helix settings"
 symlink "$PROJECTS_DIR/dotfiles/helix" "$CONFIG_DIR/helix"

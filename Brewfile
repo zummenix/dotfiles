@@ -23,6 +23,7 @@ brew "shellcheck"
 brew "yt-dlp"
 brew "podman"
 brew "jj"
+brew "taplo"
 brew "asciinema"
 brew "fzf"
 

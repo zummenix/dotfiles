@@ -51,6 +51,15 @@ function symlink {
     ls -l "$2"
 }
 
+USER_ENV="$1"
+if test "$USER_ENV" = "home" -o "$USER_ENV" = "work"; then
+    desc "Using '$USER_ENV' environment"
+else
+    error "Usage: bootstrap USER_ENV"
+    error "USER_ENV either 'home' or 'work'"
+    exit 1
+fi
+
 CONFIG_DIR="$HOME/.config"
 PROJECTS_DIR="$HOME/projects"
 
@@ -91,7 +100,7 @@ unlink "$CONFIG_DIR/alacritty" || true
 unlink "$CONFIG_DIR/nvim" || true
 
 desc "Install/cleanup dependencies using Brewfile"
-brew bundle --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile" -v
+brew bundle --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile.$USER_ENV" -v
 
 desc "Symlink helix settings"
 symlink "$PROJECTS_DIR/dotfiles/helix" "$CONFIG_DIR/helix"
@@ -126,16 +135,21 @@ pull "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"
 cargo install --path "$PROJECTS_DIR/mprovision/crates/cli" && \
     sh "$PROJECTS_DIR"/dotfiles/scripts/strip-pretty mprovision
 
-cargo-install cargo-bloat
-cargo-install cargo-outdated
-cargo-install cargo-insta
-cargo-install cargo-diet
-cargo-install cargo-audit
-cargo-install cargo-nextest
-cargo-install cargo-llvm-cov
-cargo-install cargo-semver-checks
-cargo-install cargo-leptos
-cargo-install leptosfmt
+if test "$USER_ENV" = "home"; then
+    cargo-install cargo-bloat
+    cargo-install cargo-outdated
+    cargo-install cargo-insta
+    cargo-install cargo-diet
+    cargo-install cargo-audit
+    cargo-install cargo-nextest
+    cargo-install cargo-llvm-cov
+    cargo-install cargo-semver-checks
+    cargo-install cargo-leptos
+    cargo-install leptosfmt
+
+    cargo-install itm
+    cargo-install cargo-binutils
+fi
 
 cargo-install bottom
 cargo-install ripgrep
@@ -143,9 +157,6 @@ cargo-install tokei
 cargo-install typos-cli
 cargo-install git-delta
 cargo-install ast-grep
-
-cargo-install itm
-cargo-install cargo-binutils
 
 desc "Switch current shell to fish"
 if test "$(echo "$SHELL" | grep fish)"; then

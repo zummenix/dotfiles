@@ -2,7 +2,7 @@
 
 # Command line helper to run AnyConnect VPN client from the terminal.
 
-BIN_DIR=/opt/cisco/anyconnect/bin
+BIN_DIR=/opt/cisco/secureclient/bin
 
 _print_usage() {
     echo "Usage:"
@@ -15,16 +15,6 @@ _stop() {
 
     sudo -vp "Please type a password for %u to stop the vpn: "
     $BIN_DIR/vpn disconnect
-
-    # AnyConnect changes packet filter config. Here we reset it back.
-    # Reverts /etc/pf.conf config by removing AnyConnect's rules.
-    sudo $BIN_DIR/acinstallhelper -pfConfUpdate -revert
-
-    # The following commands ensure that there are no problems with Safari and Mail apps
-    # after reverting packet filter rules. Without these I've noticed youtube channel pics
-    # don't load and pictures don't load in Mail app.
-    sleep 1
-    sudo pfctl -F all
 
     sudo -k # Reset auth
 
@@ -42,9 +32,7 @@ if test "$COMMAND" = "start"; then
 
     trap _stop INT
 
-    # Apply AnyConnect's packet filter rules.
     sudo -vp "Please type a password for %u to start the vpn: "
-    sudo $BIN_DIR/acinstallhelper -pfConfUpdate -apply
 
     $BIN_DIR/vpn connect "$VPNHOST"
 

@@ -121,7 +121,7 @@ desc "Symlink global git ignore"
 symlink "$PROJECTS_DIR/dotfiles/git/.gitignore-global" "$HOME/.gitignore-global"
 
 desc "Symlink jj config"
-symlink "$PROJECTS_DIR/dotfiles/jj/config.toml" "$HOME/Library/Application Support/jj/config.toml"
+symlink "$PROJECTS_DIR/dotfiles/jj" "$CONFIG_DIR/jj"
 
 npm-install "vscode-langservers-extracted"
 

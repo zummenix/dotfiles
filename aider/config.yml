@@ -1,0 +1,18 @@
+# Output settings
+
+user-input-color: "#e67e22"
+tool-output-color: "#65737e"
+tool-error-color: "#bf616a"
+tool-warning-color: "#d08770"
+assistant-output-color: "#c0c5ce"
+completion-menu-color: "#e67e22"
+completion-menu-bg-color: "#343d46"
+completion-menu-current-color: "#D97218"
+completion-menu-current-bg-color: "#272E35"
+code-theme: nord
+
+# Git
+
+gitignore: false # added in global gitignore
+auto-commits: false
+dirty-commits: false

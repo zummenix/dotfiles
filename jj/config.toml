@@ -4,9 +4,6 @@
 name = "Aleksey Kuznetsov"
 email = "zummenix@gmail.com"
 
-[git]
-push-bookmark-prefix = "zummenix/push-"
-
 [ui]
 default-command = ["log", "--limit", "13"]
 diff-formatter = ":git"
@@ -24,6 +21,7 @@ if(self,
   label("elided", "◌"),
 )
 '''
+git_push_bookmark = '"zummenix/push-" ++ change_id.short()'
 
 [template-aliases]
 prompt_show_oneline = '''

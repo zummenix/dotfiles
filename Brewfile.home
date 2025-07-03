@@ -26,6 +26,7 @@ brew "jj"
 brew "taplo"
 brew "asciinema"
 brew "fzf"
+brew "aider"
 
 cask "font-source-code-pro"
 cask "wezterm"

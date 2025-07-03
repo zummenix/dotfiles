@@ -9,7 +9,7 @@ push-bookmark-prefix = "zummenix/push-"
 
 [ui]
 default-command = ["log", "--limit", "13"]
-diff.format = "git"
+diff-formatter = ":git"
 pager = ["sh", "-c", "delta --diff-so-fancy | less -RX"]
 
 [templates]

@@ -8,6 +8,7 @@ email = "zummenix@gmail.com"
 default-command = ["log", "--limit", "13"]
 diff-formatter = ":git"
 pager = ["sh", "-c", "delta --diff-so-fancy | less -RX"]
+bookmark-list-sort-keys = ["committer-date-"]
 
 [templates]
 log = 'log_oneline'

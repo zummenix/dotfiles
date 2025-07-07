@@ -125,16 +125,6 @@ symlink "$PROJECTS_DIR/dotfiles/jj" "$CONFIG_DIR/jj"
 
 npm-install "vscode-langservers-extracted"
 
-desc "Installing xcopen"
-pull "git@github.com:zummenix/xcopen.git" "$PROJECTS_DIR/xcopen"
-cargo install --path "$PROJECTS_DIR/xcopen" && \
-    sh "$PROJECTS_DIR"/dotfiles/scripts/strip-pretty xcopen
-
-desc "Installing mprovision"
-pull "git@github.com:zummenix/mprovision.git" "$PROJECTS_DIR/mprovision"
-cargo install --path "$PROJECTS_DIR/mprovision/crates/cli" && \
-    sh "$PROJECTS_DIR"/dotfiles/scripts/strip-pretty mprovision
-
 if test "$USER_ENV" = "home"; then
     cargo-install cargo-bloat
     cargo-install cargo-outdated

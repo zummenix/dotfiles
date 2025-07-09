@@ -123,6 +123,9 @@ symlink "$PROJECTS_DIR/dotfiles/git/.gitignore-global" "$HOME/.gitignore-global"
 desc "Symlink jj config"
 symlink "$PROJECTS_DIR/dotfiles/jj" "$CONFIG_DIR/jj"
 
+desc "Symlink aider config"
+symlink "$PROJECTS_DIR/dotfiles/aider/config.yml" "$HOME/.aider.conf.yml"
+
 npm-install "vscode-langservers-extracted"
 
 if test "$USER_ENV" = "home"; then

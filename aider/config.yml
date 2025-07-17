@@ -16,3 +16,8 @@ code-theme: nord
 gitignore: false # added in global gitignore
 auto-commits: false
 dirty-commits: false
+subtree-only: true
+
+# Upgrading
+
+check-update: false

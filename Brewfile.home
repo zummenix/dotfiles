@@ -27,6 +27,7 @@ brew "taplo"
 brew "asciinema"
 brew "fzf"
 brew "aider"
+brew "wireshark"
 
 cask "font-source-code-pro"
 cask "wezterm"

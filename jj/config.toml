@@ -27,7 +27,7 @@ git_push_bookmark = '"zummenix/push-" ++ change_id.short()'
 [template-aliases]
 prompt_show_oneline = '''
 concat(
-  "[" ++ format_short_change_id_with_hidden_and_divergent_info(self) ++ "] ",
+  "[" ++ format_short_change_id_with_change_offset(self) ++ "] ",
   if(empty, "○", "⦿") ++ " ",
   if(description, description.first_line(), description_placeholder),
   "\n",
@@ -42,14 +42,14 @@ if(root,
       separate(" ",
         committer.timestamp().local().format("%F %R"),
         if(author.email(), author.email().local().substr(0, 10), email_placeholder),
-        format_short_change_id_with_hidden_and_divergent_info(self),
+        format_short_change_id_with_change_offset(self),
         if(conflict, label("conflict", "conflict")),
         if(empty, label("empty", "(empty)")),
         if(description, description.first_line(), description_placeholder),
         bookmarks,
         tags,
         working_copies,
-        if(self.git_head(), label("git_head", "HEAD")),
+        if(self.contained_in('first_parent(@)'), label("git_head", "HEAD")),
       ) ++ "\n",
     ),
   )

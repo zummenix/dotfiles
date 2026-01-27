@@ -5,20 +5,20 @@ set PATH "$HOME/projects/dotfiles/scripts" $PATH
 set -Ux fish_user_paths /opt/homebrew/bin/ $fish_user_paths
 set -Ux LC_ALL "en_US.UTF-8"
 
-set fish_color_command white
-set fish_color_comment white
-set fish_color_cwd white
-set fish_color_cwd_root white
-set fish_color_end white
-set fish_color_error white
-set fish_color_history_current white
-set fish_color_match white
-set fish_color_param white
-set fish_color_redirection white
-set fish_color_valid_path white
-set fish_color_escape white
-set fish_color_quote white
-set fish_pager_color_description normal
+set --global fish_color_autosuggestion 555 brblack
+set --global fish_color_cancel -r
+set --global fish_color_host normal
+set --global fish_color_host_remote yellow
+set --global fish_color_normal normal
+set --global fish_color_operator 00a6b2
+set --global fish_color_search_match white --background=brblack
+set --global fish_color_selection white --bold --background=brblack
+set --global fish_color_status red
+set --global fish_color_user brgreen
+set --global fish_pager_color_completion
+set --global fish_pager_color_prefix normal --bold --underline
+set --global fish_pager_color_progress brwhite --background=cyan
+set --global fish_pager_color_selected_background -r
 
 set fish_greeting ""
 

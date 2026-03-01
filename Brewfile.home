@@ -28,6 +28,8 @@ brew "asciinema"
 brew "fzf"
 brew "aider"
 brew "wireshark"
+brew "uv"
+brew "ruff"
 
 cask "font-source-code-pro"
 cask "wezterm"

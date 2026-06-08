@@ -100,7 +100,7 @@ unlink "$CONFIG_DIR/alacritty" || true
 unlink "$CONFIG_DIR/nvim" || true
 
 desc "Install/cleanup dependencies using Brewfile"
-brew bundle --cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile.$USER_ENV" -v
+brew bundle cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile.$USER_ENV" --install
 
 desc "Symlink helix settings"
 symlink "$PROJECTS_DIR/dotfiles/helix" "$CONFIG_DIR/helix"
@@ -134,7 +134,6 @@ if test "$USER_ENV" = "home"; then
     cargo-install cargo-insta
     cargo-install cargo-diet
     cargo-install cargo-audit
-    cargo-install cargo-nextest
     cargo-install cargo-llvm-cov
     cargo-install cargo-semver-checks
     cargo-install cargo-leptos

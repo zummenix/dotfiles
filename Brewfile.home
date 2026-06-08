@@ -1,5 +1,5 @@
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
+tap "michaeldhopkins/tap"
 
 brew "cmake"
 brew "fish"
@@ -26,10 +26,11 @@ brew "jj"
 brew "taplo"
 brew "asciinema"
 brew "fzf"
-brew "aider"
 brew "wireshark"
 brew "uv"
 brew "ruff"
+brew "qwen-code"
+brew "safe-chains", trusted: true
 
 cask "font-source-code-pro"
 cask "wezterm"

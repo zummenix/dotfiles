@@ -1,5 +1,4 @@
 tap "homebrew/bundle"
-tap "michaeldhopkins/tap"
 
 brew "cmake"
 brew "fish"
@@ -30,7 +29,7 @@ brew "wireshark"
 brew "uv"
 brew "ruff"
 brew "qwen-code"
-brew "safe-chains", trusted: true
+brew "michaeldhopkins/tap/safe-chains", trusted: true
 brew "just"
 
 cask "font-source-code-pro"

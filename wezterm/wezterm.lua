@@ -40,4 +40,23 @@ config.window_frame = {
 
 config.color_scheme = 'Ocean (base16)'
 
+config.keys = {
+  {
+    key = '\\',
+    mods = 'CTRL',
+    action = wezterm.action.SplitPane {
+      direction = 'Right',
+      size = { Percent = 50 },
+    },
+  },
+  {
+    key = '|',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.SplitPane {
+      direction = 'Down',
+      size = { Percent = 50 },
+    },
+  },
+}
+
 return config

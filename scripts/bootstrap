@@ -98,6 +98,7 @@ desc "Remove legacy symlinks"
 unlink "$CONFIG_DIR/zellij" || true
 unlink "$CONFIG_DIR/alacritty" || true
 unlink "$CONFIG_DIR/nvim" || true
+unlink "$HOME/.aider.conf.yml" || true
 
 desc "Install/cleanup dependencies using Brewfile"
 brew bundle cleanup --file "$PROJECTS_DIR/dotfiles/Brewfile.$USER_ENV" --install
@@ -122,9 +123,6 @@ symlink "$PROJECTS_DIR/dotfiles/git/.gitignore-global" "$HOME/.gitignore-global"
 
 desc "Symlink jj config"
 symlink "$PROJECTS_DIR/dotfiles/jj" "$CONFIG_DIR/jj"
-
-desc "Symlink aider config"
-symlink "$PROJECTS_DIR/dotfiles/aider/config.yml" "$HOME/.aider.conf.yml"
 
 npm-install "vscode-langservers-extracted"
 

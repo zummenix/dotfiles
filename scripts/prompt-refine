@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Refines a user-provided prompt via an LLM CLI. After each refinement,
+# offers the option to re-edit the initial message and refine again.
+#
+# macOS-only (uses pbcopy).
+# Requires $EDITOR to support file:line syntax (vim, nvim, helix).
+
+function _bail {
+    echo "prompt-refine: $1" 1>&2
+    exit 1
+}
+
+test -z "$1" && _bail "usage: prompt-refine <llm-command>"
+command -v "$1" >/dev/null 2>&1 || _bail "'$1' not found in PATH"
+
+test -z "$EDITOR" && _bail "\$EDITOR is not set"
+command -v "$EDITOR" >/dev/null 2>&1 || _bail "\$EDITOR '$EDITOR' not found in PATH"
+
+command -v pbcopy >/dev/null 2>&1 || _bail "pbcopy not found in PATH"
+
+TEMPFILE=$(mktemp -t prompt-refine) || _bail "mktemp failed"
+mv "$TEMPFILE" "${TEMPFILE}.md" || _bail "mv failed"
+TEMPFILE="${TEMPFILE}.md"
+trap 'rm -f "$TEMPFILE"' EXIT
+
+first=1
+while true; do
+    if [[ $first -eq 1 ]]; then
+        printf '%s\n\n' '/prompt-refine' > "$TEMPFILE"
+        first=0
+    fi
+
+    "$EDITOR" "$TEMPFILE":3 || _bail "editor exited with error"
+
+    output=$("$1" < "$TEMPFILE") || _bail "LLM '$1' failed"
+    printf '%s' "$output" | pbcopy
+    printf '%s\n' "$output"
+
+    read -rp "Accept? [Y/r] " ans
+    case "$ans" in
+        ""|y|Y) break ;;
+        *) continue ;;
+    esac
+done

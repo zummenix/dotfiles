@@ -19,6 +19,7 @@ brew "podman"
 brew "jj"
 brew "taplo"
 brew "fzf"
+brew "yarn"
 
 cask "font-source-code-pro"
 cask "wezterm"

@@ -31,6 +31,7 @@ brew "ruff"
 brew "qwen-code"
 brew "michaeldhopkins/tap/safe-chains", trusted: true
 brew "just"
+brew "yarn"
 
 cask "font-source-code-pro"
 cask "wezterm"

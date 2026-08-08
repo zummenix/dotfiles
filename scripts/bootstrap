@@ -45,6 +45,12 @@ function cargo-install {
     cargo install "$1"
 }
 
+# Uninstalls a tool.
+function cargo-uninstall {
+    desc "Uninstalling $1"
+    cargo uninstall "$1" || echo "$1 already uninstalled"
+}
+
 # Creates a symbolic link to a file or a directory.
 function symlink {
     ln -hfs "$1" "$2"
@@ -131,14 +137,15 @@ if test "$USER_ENV" = "home"; then
     cargo-install cargo-outdated
     cargo-install cargo-insta
     cargo-install cargo-diet
-    cargo-install cargo-audit
     cargo-install cargo-llvm-cov
-    cargo-install cargo-semver-checks
     cargo-install cargo-leptos
     cargo-install leptosfmt
 
     cargo-install itm
     cargo-install cargo-binutils
+
+    cargo-uninstall cargo-semver-checks
+    cargo-uninstall cargo-audit
 fi
 
 cargo-install bottom
@@ -146,7 +153,7 @@ cargo-install ripgrep
 cargo-install tokei
 cargo-install typos-cli
 cargo-install git-delta
-cargo-install ast-grep
+cargo-uninstall ast-grep
 
 desc "Switch current shell to fish"
 if test "$(echo "$SHELL" | grep fish)"; then

@@ -141,6 +141,7 @@ if test "$USER_ENV" = "home"; then
     cargo-install cargo-llvm-cov
     cargo-install cargo-leptos
     cargo-install leptosfmt
+    cargo-install cargo-watch
 
     cargo-install itm
     cargo-install cargo-binutils

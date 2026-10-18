@@ -33,6 +33,7 @@ brew "qwen-code"
 brew "michaeldhopkins/tap/safe-chains", trusted: true
 brew "just"
 brew "yarn"
+brew "playwright-cli"
 
 cask "font-source-code-pro"
 cask "wezterm"

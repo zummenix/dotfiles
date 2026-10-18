@@ -131,6 +131,7 @@ desc "Symlink jj config"
 symlink "$PROJECTS_DIR/dotfiles/jj" "$CONFIG_DIR/jj"
 
 npm-install "vscode-langservers-extracted"
+npm-install "typescript-language-server"
 
 if test "$USER_ENV" = "home"; then
     cargo-install cargo-bloat
@@ -140,6 +141,7 @@ if test "$USER_ENV" = "home"; then
     cargo-install cargo-llvm-cov
     cargo-install cargo-leptos
     cargo-install leptosfmt
+    cargo-install cargo-watch
 
     cargo-install itm
     cargo-install cargo-binutils

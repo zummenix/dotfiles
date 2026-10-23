@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 USER_ENV="${1:-}"
 
-if test "$USER_ENV" = "home"; then
-    DEST="$HOME/.qwen/skills"
-elif test "$USER_ENV" = "work"; then
-    DEST="$HOME/.nessy/skills"
-else
-    echo "Usage: $0 USER_ENV" >&2
-    echo "USER_ENV must be 'home' or 'work'" >&2
-    exit 1
-fi
+case "$USER_ENV" in
+    home)
+        DESTS=("$HOME/.qwen/skills" "$HOME/.dsh/skills")
+        ;;
+    work)
+        DESTS=("$HOME/.nessy/skills")
+        ;;
+    *)
+        echo "Usage: $0 USER_ENV" >&2
+        echo "USER_ENV must be 'home' or 'work'" >&2
+        exit 1
+        ;;
+esac
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE="$SCRIPT_DIR/../skills"
@@ -20,23 +25,32 @@ if test ! -d "$SOURCE"; then
     exit 1
 fi
 
-mkdir -p "$DEST"
+total_copied=0
+total_skipped=0
 
-echo "Copying skills from $SOURCE to $DEST"
-copied=0
-skipped=0
-for skill_dir in "$SOURCE"/*/; do
-    test -d "$skill_dir" || continue
-    name=$(basename "$skill_dir")
-    if test ! -f "$skill_dir/SKILL.md"; then
-        echo "  warning: $name has no SKILL.md, skipping" >&2
-        skipped=$((skipped + 1))
-        continue
-    fi
-    rm -rf "${DEST:?}/$name"
-    cp -R "$skill_dir" "$DEST/$name"
-    echo "  copy $name → $DEST/$name"
-    copied=$((copied + 1))
+for DEST in "${DESTS[@]}"; do
+    echo "Copying skills from $SOURCE to $DEST"
+    mkdir -p "$DEST"
+
+    copied=0
+    skipped=0
+    for skill_dir in "$SOURCE"/*/; do
+        test -d "$skill_dir" || continue
+        name=$(basename "$skill_dir")
+        if test ! -f "$skill_dir/SKILL.md"; then
+            echo "  warning: $name has no SKILL.md, skipping" >&2
+            skipped=$((skipped + 1))
+            continue
+        fi
+        rm -rf "${DEST:?}/$name"
+        cp -R "$skill_dir" "$DEST/$name"
+        echo "  copy $name → $DEST/$name"
+        copied=$((copied + 1))
+    done
+
+    echo "Copied $copied skills to $DEST, skipped $skipped."
+    total_copied=$((total_copied + copied))
+    total_skipped=$((total_skipped + skipped))
 done
 
-echo "Copied $copied skills, skipped $skipped."
+echo "Done: copied $total_copied skills across ${#DESTS[@]} destination(s), skipped $total_skipped."

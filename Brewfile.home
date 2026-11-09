@@ -34,6 +34,7 @@ brew "michaeldhopkins/tap/safe-chains", trusted: true
 brew "just"
 brew "yarn"
 brew "playwright-cli"
+brew "ollama"
 
 cask "font-source-code-pro"
 cask "wezterm"

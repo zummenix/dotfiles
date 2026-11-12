@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Helper script to start ollama serve with my settings.
+# Usage: caffeinate -i oh-my-ollama-serve
+
+export OLLAMA_FLASH_ATTENTION=1
+export OLLAMA_KV_CACHE_TYPE=q8_0
+export OLLAMA_KEEP_ALIVE=30m0s
+ollama serve

@@ -29,6 +29,7 @@ brew "fzf"
 brew "wireshark"
 brew "uv"
 brew "ruff"
+brew "pylsp"
 brew "qwen-code"
 brew "michaeldhopkins/tap/safe-chains", trusted: true
 brew "just"
